@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess The Flag</title>
+    <link rel="shortcut icon" href="img/logoweb.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="styleLogin.css">
+</head>
+<body>
+    <!-- Cabeçario -->
+    <header class="menu">
+
+        <nav>
+            <ul>
+
+                <!-- Imagem da bandeira -->
+                <li id="img_logo"><img src="img/logo.svg"></li>
+
+            </ul>
+        </nav>
+
+    </header>
+    
+    <!-- Imagem da GTF no centro da tela -->
+    <li id="img_logoc"><img src="img/globo.png"></li>
+
+
+    <!-- Digite seu nome -->
+     <div class ="seu_nome">
+
+        <label for="seu_nome">Login:</label>
+        <input type="text" id="seu_nome" name="seu_nome" placeholder="Digite seu nome...">
+
+        <!-- Botão de enviar -->
+        <button onclick="dados()" class="botao-enviar">Enviar</button>
+    </div>
+    <script src="localStorage.js"></script>
+   
+
+</body>
