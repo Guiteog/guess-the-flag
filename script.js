@@ -113,7 +113,7 @@ function ponts(event) {
     setTimeout(() => {
         if(round === 9){
             dados()
-            window.location.href = "./final.html";
+            window.location.replace("./final.html");
         }
         pontuacaoElemento.style.color = "";
         button()

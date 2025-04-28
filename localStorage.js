@@ -16,7 +16,7 @@ async function dados(){
             throw new Error("Erro no envio dos dados");
         }
 
-        window.location.href = "jogo.html";
+        window.location.replace("jogo.html");
 
     } catch(erro){
         console.error("Erro ao enviar dados:", erro);

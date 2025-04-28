@@ -11,7 +11,7 @@ function exibirResultados() {
 
 function voltarMenu() {
   // Substitua com o redirecionamento real do seu jogo
-  window.location.href = "./index.html";
+  window.location.replace("./index.html");
   
 }
 
