@@ -21,7 +21,7 @@ async function dados(){
         }
 
         else{
-            window.location.replace("./meio/index.html");
+            window.location.replace("./meio/indexJSem.html");
         }
         
 
