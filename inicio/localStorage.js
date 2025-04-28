@@ -1,4 +1,5 @@
 let nome = document.getElementById('seu_nome');
+let nomeADM = "nomeADM123"
 
 async function dados(){
     localStorage.setItem("Jogador", JSON.stringify({nome:nome.value}));
@@ -15,8 +16,14 @@ async function dados(){
         if (!resposta.ok){
             throw new Error("Erro no envio dos dados");
         }
+        if(nome === nomeADM ){
+            window.location.replace("./meio/indexJogadores.html");
+        }
 
-        window.location.replace("jogo.html");
+        else{
+            window.location.replace("./meio/index.html");
+        }
+        
 
     } catch(erro){
         console.error("Erro ao enviar dados:", erro);
@@ -25,10 +32,10 @@ async function dados(){
     
 }
 
-function jogadores(){
-    fetch("http://10.106.208.18:1880/dados")
-        .then(response => response.json())
-        .then(data => {
+// function jogadores(){
+//     fetch("http://10.106.208.18:1880/dados")
+//         .then(response => response.json())
+//         .then(data => {
 
-        })
-}
+//         })
+// }
