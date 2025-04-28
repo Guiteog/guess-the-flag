@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins' , arial;
+    
+}
+body{
+    background-color: #F2F2F2;
+
+}
+.menu{
+    display: grid;
+    align-items: center;
+    height: clamp(25px, 8.5vh, 100px);
+    background-color: #e6e6e6;
+    
+}
+
+.menu ul{
+    display: flex;
+    justify-content:space-between;
+    list-style: none;
+
+}
+
+.menu #pts, #cronometro{
+    margin-top: clamp(3px, 2.45vh, 27px);
+    font-size: clamp(3px, 2.45vh, 18px);
+    padding: 0 2vw;
+    font-weight: 450;
+}
+
+#pts_jogo{
+    color: #9E9E9E;
+}
+
+.centro{
+    display: grid;
+    padding-top: clamp(10px, 17vh, 220px);
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+    'cima'
+    'baixo'
+    ;
+}
+
+.img_bandeira{
+    display: flex;
+    grid-area: 'cima';
+    align-items: center;
+    justify-content: center;
+    margin-bottom: clamp(25px, 2vh, 34px);
+
+}
+
+/* Bandeira imagem */
+#bandeira{
+    width: clamp(300px, 27vw, 400px);
+    height: clamp(170px, 29.235vh, 350px);
+    display: grid;
+    max-width: 400px;
+    max-height: 350px;
+    border: 3px solid  #000000f8;
+
+}
+
+/* Imagem logo */
+#img_logo img{
+    width: clamp(130px, 9.2vw, 195px);
+   
+}
+
+#img_logo{
+    margin-bottom: clamp(5px, 4vh, 15px);
+}
+
+.button{
+    width: clamp(10px, 45vw, 150px);
+    height: clamp(30px, 7vh, 90px);
+}
+.opcoes {
+    
+    display: flex;
+    grid-area: 'baixo';
+    flex-wrap: wrap;
+    justify-self: center; 
+    align-self: center;
+    margin: auto;
+    gap: 25px;
+
+
+}
+
+.button {
+    flex: 1 1 40%; 
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:#333333;
+    border-radius: 5px;
+    
+}
+
+
+.button{
+    color: #F2F2F2;
+    border: none;
+    font-weight: 450;
+}
