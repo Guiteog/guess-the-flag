@@ -1,0 +1,147 @@
+[
+    {
+        "id": "f0c65390ea861234",
+        "type": "tab",
+        "label": "Fluxo 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "83de6736bbbfb472",
+        "type": "tab",
+        "label": "Fluxo 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "126c40cf4cb3aeeb",
+        "type": "http in",
+        "z": "f0c65390ea861234",
+        "name": "",
+        "url": "/dados",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 750,
+        "y": 300,
+        "wires": [
+            [
+                "013a246f0cd65995"
+            ]
+        ]
+    },
+    {
+        "id": "013a246f0cd65995",
+        "type": "function",
+        "z": "f0c65390ea861234",
+        "name": "function 1",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 400,
+        "wires": [
+            [
+                "545095cb5b084a47"
+            ]
+        ]
+    },
+    {
+        "id": "545095cb5b084a47",
+        "type": "http response",
+        "z": "f0c65390ea861234",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "8a6c3afa8a656375",
+        "type": "http in",
+        "z": "f0c65390ea861234",
+        "name": "",
+        "url": "/dados",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 570,
+        "y": 300,
+        "wires": [
+            [
+                "013a246f0cd65995"
+            ]
+        ]
+    },
+    {
+        "id": "2c0a307d3c7c46da",
+        "type": "http in",
+        "z": "83de6736bbbfb472",
+        "name": "",
+        "url": "/paises",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 690,
+        "y": 300,
+        "wires": [
+            [
+                "b65dd0a261f87adc"
+            ]
+        ]
+    },
+    {
+        "id": "b65dd0a261f87adc",
+        "type": "file in",
+        "z": "83de6736bbbfb472",
+        "name": "",
+        "filename": "C:/Users/Aluno/Desktop/Dev/paises.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 780,
+        "y": 360,
+        "wires": [
+            [
+                "8cdad1a80422348b"
+            ]
+        ]
+    },
+    {
+        "id": "8cdad1a80422348b",
+        "type": "json",
+        "z": "83de6736bbbfb472",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 690,
+        "y": 420,
+        "wires": [
+            [
+                "e045c8308c6fcaf6"
+            ]
+        ]
+    },
+    {
+        "id": "e045c8308c6fcaf6",
+        "type": "http response",
+        "z": "83de6736bbbfb472",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 690,
+        "y": 500,
+        "wires": []
+    }
+]
