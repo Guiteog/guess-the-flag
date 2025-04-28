@@ -16,7 +16,7 @@ async function dados(){
         if (!resposta.ok){
             throw new Error("Erro no envio dos dados");
         }
-        if(nome === nomeADM ){
+        if(nome.value === nomeADM ){
             window.location.replace("./meio/indexJogadores.html");
         }
 
