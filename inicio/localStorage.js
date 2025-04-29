@@ -6,7 +6,7 @@ async function dados(){
 
     //Mandar os dados para o servidor
     try{
-        let resposta = await fetch("http://10.106.208.18:1880/dados",{
+        let resposta = await fetch("http://10.106.208.32:1880/dados",{
             method: "POST",
             headers: {"Content-Type": "application/json" },
             body:JSON.stringify({nome: nome.value})

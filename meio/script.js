@@ -20,7 +20,7 @@ let round = 0;
 
 
 //pegar todos os dados da API e Amazerna dentro de uma variavel
-fetch('http://10.106.208.18:1880/paises')
+fetch('http://10.106.208.32:1880/paises')
     .then(response => response.json())
     .then(data => {
         paises = data;
