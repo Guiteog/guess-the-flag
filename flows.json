@@ -16,34 +16,14 @@
         "env": []
     },
     {
-        "id": "013a246f0cd65995",
-        "type": "function",
-        "z": "f0c65390ea861234",
-        "name": "function 1",
-        "func": "\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 720,
-        "y": 400,
-        "wires": [
-            [
-                "545095cb5b084a47"
-            ]
-        ]
-    },
-    {
         "id": "545095cb5b084a47",
         "type": "http response",
         "z": "f0c65390ea861234",
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 710,
-        "y": 480,
+        "x": 1410,
+        "y": 400,
         "wires": []
     },
     {
@@ -55,13 +35,153 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 730,
-        "y": 320,
+        "x": 470,
+        "y": 240,
         "wires": [
             [
-                "013a246f0cd65995"
+                "9e15f52fc239f81b",
+                "545095cb5b084a47"
             ]
         ]
+    },
+    {
+        "id": "126c40cf4cb3aeeb",
+        "type": "http in",
+        "z": "f0c65390ea861234",
+        "name": "",
+        "url": "/retornadados",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 490,
+        "y": 100,
+        "wires": [
+            [
+                "e79db8850b605412",
+                "9e15f52fc239f81b"
+            ]
+        ]
+    },
+    {
+        "id": "e79db8850b605412",
+        "type": "file in",
+        "z": "f0c65390ea861234",
+        "name": "",
+        "filename": "banco",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 710,
+        "y": 100,
+        "wires": [
+            [
+                "cb9d3b8d66d76809"
+            ]
+        ]
+    },
+    {
+        "id": "d30889b49500f891",
+        "type": "change",
+        "z": "f0c65390ea861234",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "}",
+                "fromt": "str",
+                "to": "},",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": " ",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "},]",
+                "fromt": "str",
+                "to": "}]",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1100,
+        "y": 100,
+        "wires": [
+            [
+                "9c8dcc97ebd55f2a"
+            ]
+        ]
+    },
+    {
+        "id": "cb9d3b8d66d76809",
+        "type": "function",
+        "z": "f0c65390ea861234",
+        "name": "function 2",
+        "func": "var string = \"[\";\n\nstring = string + msg.payload + '{\"nome\":\"guilherme\"} '+\"]\";\n\nmsg.payload = string;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 100,
+        "wires": [
+            [
+                "d30889b49500f891"
+            ]
+        ]
+    },
+    {
+        "id": "9c8dcc97ebd55f2a",
+        "type": "json",
+        "z": "f0c65390ea861234",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1290,
+        "y": 100,
+        "wires": [
+            [
+                "545095cb5b084a47",
+                "9e15f52fc239f81b"
+            ]
+        ]
+    },
+    {
+        "id": "9e15f52fc239f81b",
+        "type": "debug",
+        "z": "f0c65390ea861234",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1500,
+        "y": 160,
+        "wires": []
     },
     {
         "id": "2c0a307d3c7c46da",

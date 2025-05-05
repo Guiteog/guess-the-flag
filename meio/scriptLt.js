@@ -5,6 +5,7 @@ let players;
 
 //pegar dados dos players
 function dados(){
+         
   fetch("https://daf1-200-206-76-106.ngrok-free.app/dados")
     .then(response => response.json())
     .then(data =>{
@@ -16,6 +17,8 @@ function dados(){
 // Simula nova entrada de jogadores
 function updatePlayerList(players) {
   list.innerHTML = ""; // Limpa
+
+  console.log(players);
 
   players.forEach(player => {
     const li = document.createElement("li");
