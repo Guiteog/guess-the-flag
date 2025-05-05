@@ -16,23 +16,6 @@
         "env": []
     },
     {
-        "id": "126c40cf4cb3aeeb",
-        "type": "http in",
-        "z": "f0c65390ea861234",
-        "name": "",
-        "url": "/dados",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 750,
-        "y": 300,
-        "wires": [
-            [
-                "013a246f0cd65995"
-            ]
-        ]
-    },
-    {
         "id": "013a246f0cd65995",
         "type": "function",
         "z": "f0c65390ea861234",
@@ -72,8 +55,8 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 570,
-        "y": 300,
+        "x": 730,
+        "y": 320,
         "wires": [
             [
                 "013a246f0cd65995"
