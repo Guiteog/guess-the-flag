@@ -5,7 +5,7 @@ let players;
 
 //pegar dados dos players
 function dados(){
-  fetch("https://2658-200-206-76-106.ngrok-free.app/dados")
+  fetch("https://daf1-200-206-76-106.ngrok-free.app/dados")
     .then(response => response.json)
     .then(data =>{
         players = data;
