@@ -22,8 +22,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 1410,
-        "y": 400,
+        "x": 1470,
+        "y": 380,
         "wires": []
     },
     {
@@ -35,8 +35,8 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 470,
-        "y": 240,
+        "x": 530,
+        "y": 220,
         "wires": [
             [
                 "9e15f52fc239f81b",
@@ -53,8 +53,8 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 490,
-        "y": 100,
+        "x": 550,
+        "y": 80,
         "wires": [
             [
                 "e79db8850b605412",
@@ -74,58 +74,11 @@
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 710,
-        "y": 100,
+        "x": 770,
+        "y": 80,
         "wires": [
             [
                 "cb9d3b8d66d76809"
-            ]
-        ]
-    },
-    {
-        "id": "d30889b49500f891",
-        "type": "change",
-        "z": "f0c65390ea861234",
-        "name": "",
-        "rules": [
-            {
-                "t": "change",
-                "p": "payload",
-                "pt": "msg",
-                "from": "}",
-                "fromt": "str",
-                "to": "},",
-                "tot": "str"
-            },
-            {
-                "t": "change",
-                "p": "payload",
-                "pt": "msg",
-                "from": " ",
-                "fromt": "str",
-                "to": "",
-                "tot": "str"
-            },
-            {
-                "t": "change",
-                "p": "payload",
-                "pt": "msg",
-                "from": "},]",
-                "fromt": "str",
-                "to": "}]",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1100,
-        "y": 100,
-        "wires": [
-            [
-                "9c8dcc97ebd55f2a"
             ]
         ]
     },
@@ -134,18 +87,18 @@
         "type": "function",
         "z": "f0c65390ea861234",
         "name": "function 2",
-        "func": "var string = \"[\";\n\nstring = string + msg.payload + '{\"nome\":\"guilherme\"} '+\"]\";\n\nmsg.payload = string;\nreturn msg;",
+        "func": "let dados = [];\ntry {\n    dados = JSON.parse(msg.payload);\n} catch (e) {\n    // Trate erro de JSON inválido\n}\nmsg.payload = dados;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 920,
-        "y": 100,
+        "x": 980,
+        "y": 80,
         "wires": [
             [
-                "d30889b49500f891"
+                "9c8dcc97ebd55f2a"
             ]
         ]
     },
@@ -157,8 +110,8 @@
         "property": "payload",
         "action": "",
         "pretty": false,
-        "x": 1290,
-        "y": 100,
+        "x": 1350,
+        "y": 80,
         "wires": [
             [
                 "545095cb5b084a47",
@@ -179,8 +132,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1500,
-        "y": 160,
+        "x": 1520,
+        "y": 240,
         "wires": []
     },
     {
