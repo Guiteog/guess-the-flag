@@ -16,14 +16,34 @@
         "env": []
     },
     {
+        "id": "013a246f0cd65995",
+        "type": "function",
+        "z": "f0c65390ea861234",
+        "name": "function 1",
+        "func": "let dados;\n\n// Tenta processar os dados do arquivo\ntry {\n    let jsonString = msg.payload.trim(); // Remove espaços em branco extras\n    let parsedData = JSON.parse(jsonString); // Converte de volta para objeto\n\n    if (!Array.isArray(parsedData)) {\n        parsedData = [parsedData]; // Se não for array, transforma em array\n    }\n\n    // Junta todos os dados em um único array\n    dados = parsedData.reduce((acc, item) => {\n        if (item.nome) {\n            acc.push({ nome: item.nome });\n        }\n        return acc;\n    }, []);\n    \n} catch (e) {\n    dados = []; // Caso de erro, cria um array vazio\n}\n\n// Adiciona o nome enviado pela URL\nlet nome = msg.req.query.nome;\nif (nome) {\n    dados.push({ nome: nome }); // Adiciona o novo nome\n}\n\n// Atualiza msg.payload com o JSON atualizado\nmsg.payload = JSON.stringify(dados, null, 2); // Formatação legível\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 240,
+        "wires": [
+            [
+                "7a5eafc04aec4afc"
+            ]
+        ]
+    },
+    {
         "id": "545095cb5b084a47",
         "type": "http response",
         "z": "f0c65390ea861234",
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 1470,
-        "y": 380,
+        "x": 1230,
+        "y": 240,
         "wires": []
     },
     {
@@ -35,12 +55,11 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 530,
-        "y": 220,
+        "x": 390,
+        "y": 240,
         "wires": [
             [
-                "9e15f52fc239f81b",
-                "545095cb5b084a47"
+                "3763ed75e7224f81"
             ]
         ]
     },
@@ -53,12 +72,11 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 550,
-        "y": 80,
+        "x": 490,
+        "y": 100,
         "wires": [
             [
-                "e79db8850b605412",
-                "9e15f52fc239f81b"
+                "e79db8850b605412"
             ]
         ]
     },
@@ -67,35 +85,15 @@
         "type": "file in",
         "z": "f0c65390ea861234",
         "name": "",
-        "filename": "banco",
+        "filename": "banco.json",
         "filenameType": "str",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 770,
-        "y": 80,
-        "wires": [
-            [
-                "cb9d3b8d66d76809"
-            ]
-        ]
-    },
-    {
-        "id": "cb9d3b8d66d76809",
-        "type": "function",
-        "z": "f0c65390ea861234",
-        "name": "function 2",
-        "func": "let dados = [];\ntry {\n    dados = JSON.parse(msg.payload);\n} catch (e) {\n    // Trate erro de JSON inválido\n}\nmsg.payload = dados;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 980,
-        "y": 80,
+        "x": 690,
+        "y": 100,
         "wires": [
             [
                 "9c8dcc97ebd55f2a"
@@ -108,19 +106,49 @@
         "z": "f0c65390ea861234",
         "name": "",
         "property": "payload",
-        "action": "",
+        "action": "obj",
         "pretty": false,
-        "x": 1350,
-        "y": 80,
+        "x": 850,
+        "y": 100,
         "wires": [
             [
-                "545095cb5b084a47",
-                "9e15f52fc239f81b"
+                "8dc604e5330868b6",
+                "1d98be6065b57615"
             ]
         ]
     },
     {
-        "id": "9e15f52fc239f81b",
+        "id": "7a5eafc04aec4afc",
+        "type": "file",
+        "z": "f0c65390ea861234",
+        "name": "",
+        "filename": "banco.json",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 850,
+        "y": 240,
+        "wires": [
+            [
+                "08cfeb5bed16fbfa"
+            ]
+        ]
+    },
+    {
+        "id": "8dc604e5330868b6",
+        "type": "http response",
+        "z": "f0c65390ea861234",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 990,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "1d98be6065b57615",
         "type": "debug",
         "z": "f0c65390ea861234",
         "name": "debug 1",
@@ -128,13 +156,49 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
+        "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1520,
-        "y": 240,
+        "x": 1140,
+        "y": 160,
         "wires": []
+    },
+    {
+        "id": "3763ed75e7224f81",
+        "type": "file in",
+        "z": "f0c65390ea861234",
+        "name": "",
+        "filename": "banco.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 550,
+        "y": 240,
+        "wires": [
+            [
+                "013a246f0cd65995"
+            ]
+        ]
+    },
+    {
+        "id": "08cfeb5bed16fbfa",
+        "type": "json",
+        "z": "f0c65390ea861234",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 1010,
+        "y": 240,
+        "wires": [
+            [
+                "545095cb5b084a47",
+                "1d98be6065b57615"
+            ]
+        ]
     },
     {
         "id": "2c0a307d3c7c46da",
