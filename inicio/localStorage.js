@@ -4,7 +4,7 @@ let nomeADM = "nomeADM123"
 async function dados(){
     localStorage.setItem("Jogador", JSON.stringify({nome:nome.value}));
     try {
-        const resposta = await fetch(`https://1186-200-211-208-194.ngrok-free.app/dados?nome=${encodeURIComponent(nome.value)}`)
+        const resposta = await fetch(`https://1186-200-211-208-194.ngrok-free.app/dados?nome=${nome.value}`)
             if(!resposta.ok){
                 throw new Error("Erro na requisição");
             }
