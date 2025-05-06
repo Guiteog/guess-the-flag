@@ -22,7 +22,7 @@ function updatePlayerList(players) {
 
   players.forEach(player => {
     const li = document.createElement("li");
-    li.textContent = player; 
+    li.textContent = player.nome; 
     list.appendChild(li);
   });
 
