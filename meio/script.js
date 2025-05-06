@@ -20,7 +20,7 @@ let round = 0;
 
 
 //pegar todos os dados da API e Amazerna dentro de uma variavel
-fetch('https://daf1-200-206-76-106.ngrok-free.app/paises')
+fetch('https://1186-200-211-208-194.ngrok-free.app/paises')
     .then(response => response.json())
     .then(data => {
         paises = data;
