@@ -2,15 +2,7 @@
     {
         "id": "f0c65390ea861234",
         "type": "tab",
-        "label": "Fluxo 1",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "83de6736bbbfb472",
-        "type": "tab",
-        "label": "Fluxo 2",
+        "label": "Dados",
         "disabled": false,
         "info": "",
         "env": []
@@ -20,7 +12,7 @@
         "type": "function",
         "z": "f0c65390ea861234",
         "name": "function 1",
-        "func": "let dados;\n\n// Tenta processar os dados do arquivo\ntry {\n    let jsonString = msg.payload.trim(); // Remove espaços em branco extras\n    let parsedData = JSON.parse(jsonString); // Converte de volta para objeto\n\n    if (!Array.isArray(parsedData)) {\n        parsedData = [parsedData]; // Se não for array, transforma em array\n    }\n\n    // Junta todos os dados em um único array\n    dados = parsedData.reduce((acc, item) => {\n        if (item.nome) {\n            acc.push({ nome: item.nome });\n        }\n        return acc;\n    }, []);\n    \n} catch (e) {\n    dados = []; // Caso de erro, cria um array vazio\n}\n\n// Adiciona o nome enviado pela URL\nlet nome = msg.req.query.nome;\nif (nome) {\n    dados.push({ nome: nome }); // Adiciona o novo nome\n}\n\n// Atualiza msg.payload com o JSON atualizado\nmsg.payload = JSON.stringify(dados, null, 2); // Formatação legível\n\nreturn msg;\n",
+        "func": "let dados;\n\n// Tenta processar os dados do arquivo\ntry {\n    let jsonString = msg.payload.trim(); \n    let parsedData = JSON.parse(jsonString); // Converte de volta para objeto\n\n    if (!Array.isArray(parsedData)) {\n        parsedData = [parsedData]; // Se não for array, transforma em array\n    }\n\n    // Junta todos os dados em um único array\n    dados = parsedData.reduce((acc, item) => {\n        if (item.nome) {\n            acc.push({ nome: item.nome });\n        }\n        return acc;\n    }, []);\n    \n} catch (e) {\n    dados = []; // Caso de erro, cria um array vazio\n}\n\n// Adiciona o nome enviado pela URL\nlet nome = msg.req.query.nome;\nif (nome) {\n    dados.push({ nome: nome }); // Adiciona o novo nome\n}\n\n// Atualiza msg.payload com o JSON atualizado\nmsg.payload = JSON.stringify(dados, null, 2); // Formatação legível\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -42,7 +34,7 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 1230,
+        "x": 1390,
         "y": 240,
         "wires": []
     },
@@ -108,7 +100,7 @@
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 850,
+        "x": 1010,
         "y": 100,
         "wires": [
             [
@@ -143,7 +135,7 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 990,
+        "x": 1370,
         "y": 100,
         "wires": []
     },
@@ -159,7 +151,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1140,
+        "x": 1380,
         "y": 160,
         "wires": []
     },
@@ -199,69 +191,5 @@
                 "1d98be6065b57615"
             ]
         ]
-    },
-    {
-        "id": "2c0a307d3c7c46da",
-        "type": "http in",
-        "z": "83de6736bbbfb472",
-        "name": "",
-        "url": "/paises",
-        "method": "get",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 690,
-        "y": 300,
-        "wires": [
-            [
-                "b65dd0a261f87adc"
-            ]
-        ]
-    },
-    {
-        "id": "b65dd0a261f87adc",
-        "type": "file in",
-        "z": "83de6736bbbfb472",
-        "name": "",
-        "filename": "C:/Users/Aluno/Desktop/Dev/paises.json",
-        "filenameType": "str",
-        "format": "utf8",
-        "chunk": false,
-        "sendError": false,
-        "encoding": "none",
-        "allProps": false,
-        "x": 780,
-        "y": 360,
-        "wires": [
-            [
-                "8cdad1a80422348b"
-            ]
-        ]
-    },
-    {
-        "id": "8cdad1a80422348b",
-        "type": "json",
-        "z": "83de6736bbbfb472",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": false,
-        "x": 690,
-        "y": 420,
-        "wires": [
-            [
-                "e045c8308c6fcaf6"
-            ]
-        ]
-    },
-    {
-        "id": "e045c8308c6fcaf6",
-        "type": "http response",
-        "z": "83de6736bbbfb472",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 690,
-        "y": 500,
-        "wires": []
     }
 ]
