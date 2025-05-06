@@ -6,7 +6,12 @@ let players;
 //pegar dados dos players
 function dados(){
          
-  fetch("https://1186-200-211-208-194.ngrok-free.app/retornadados")
+  fetch("https://9b58-200-206-76-106.ngrok-free.app/retornadados", {
+    method: 'GET',
+    headers: {
+        'ngrok-skip-browser-warning': 'true' 
+    }
+})
     .then(response => response.json())
     .then(data =>{
         players = data;

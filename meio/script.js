@@ -20,13 +20,18 @@ let round = 0;
 
 
 //pegar todos os dados da API e Amazerna dentro de uma variavel
-fetch('https://1186-200-211-208-194.ngrok-free.app/paises')
+fetch('https://9b58-200-206-76-106.ngrok-free.app/paises', {
+    method: 'GET',
+    headers: {
+        'ngrok-skip-browser-warning': 'true' 
+    }
+})
     .then(response => response.json())
     .then(data => {
         paises = data;
         sortPais()
         
-    });
+});
 
 //Sortear os Paises
 
