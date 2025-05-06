@@ -25,25 +25,7 @@
 
   </main>
 
-  <script>
-    // Exemplo: adicionando jogadores dinamicamente (pode ser substituído por WebSocket ou fetch API)
-    const players = ["GiiLobo", "MeriGB", "PlayerX"];
-    const list = document.getElementById('playersList');
-    const startBtn = document.getElementById('startBtn');
-
-    // Simula nova entrada de jogadores
-    function updatePlayerList(players) {
-      list.innerHTML = ""; // Limpa
-      players.forEach((player, index) => {
-        const li = document.createElement("li");
-        li.innerHTML = `${index + 1}º <strong>${player}</strong>`;
-        list.appendChild(li);
-      });
-
-    }
-
-    updatePlayerList(players);
-  </script>
+  <script src="scriptLt1.js"></script>
 
 </body>
 </html>
