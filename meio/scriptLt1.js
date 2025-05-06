@@ -30,6 +30,6 @@ function updatePlayerList(players) {
     li.textContent = player.nome; 
     list.appendChild(li);
   });
+}
 
 setInterval(dados, 2500);
-}
