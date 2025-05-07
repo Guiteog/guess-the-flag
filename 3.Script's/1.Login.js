@@ -15,11 +15,11 @@ async function dados(){
             }
 
             if(nome.value === nomeADM ){
-                window.location.replace("./meio/indexJogadores.html");
+                window.location.replace("../1.Espera-Jogo/indexEspera.html");
             }
            
             else{
-                window.location.replace("./meio/indexJSem.html");
+                window.location.replace("../1.Espera-Jogo/indexEsperaSem.html");
             }
     }
     catch (erro) {
@@ -27,6 +27,3 @@ async function dados(){
     }
 }
 
-// if (!resposta.ok){
-//     throw new Error("Erro no envio dos dados");
-// }
