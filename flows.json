@@ -16,11 +16,27 @@
         "env": []
     },
     {
+        "id": "f642ecb3a07b094e",
+        "type": "tab",
+        "label": "AFK",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "274466637d8ee6a7",
+        "type": "tab",
+        "label": "Gatilho",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "013a246f0cd65995",
         "type": "function",
         "z": "f0c65390ea861234",
         "name": "function 1",
-        "func": "let dados;\n\n// Tenta processar os dados do arquivo\ntry {\n    let jsonString = msg.payload.trim(); \n    let parsedData = JSON.parse(jsonString); // Converte de volta para objeto\n\n    if (!Array.isArray(parsedData)) {\n        parsedData = [parsedData]; // Se não for array, transforma em array\n    }\n\n    // Junta todos os dados em um único array\n    dados = parsedData.reduce((acc, item) => {\n        if (item.nome) {\n            acc.push({ nome: item.nome });\n        }\n        return acc;\n    }, []);\n    \n} catch (e) {\n    dados = []; // Caso de erro, cria um array vazio\n}\n\n// Adiciona o nome enviado pela URL\nlet nome = msg.req.query.nome;\nif (nome) {\n    dados.push({ nome: nome }); // Adiciona o novo nome\n}\n\n// Atualiza msg.payload com o JSON atualizado\nmsg.payload = JSON.stringify(dados, null, 2); // Formatação legível\n\nreturn msg;\n",
+        "func": "let dados;\n\n// Tenta processar os dados do arquivo\ntry {\n    let jsonString = msg.payload.trim(); \n    let jsonObjeto = JSON.parse(jsonString); // Converte de volta para objeto\n\n    if (!Array.isArray(jsonObjeto)) {\n        jsonObjeto = [jsonObjeto]; // Se não for array, transforma em array\n    }\n\n    // Junta todos os dados em um único array\n    dados = jsonObjeto.reduce((listaJSON, item) => {\n        if (item.nome) {\n            listaJSON.push({ nome: item.nome });\n        }\n        return listaJSON;\n    }, []);\n    \n} catch (e) {\n    dados = []; // Caso de erro, cria um array vazio\n}\n\n// Adiciona o nome enviado pela URL\nlet nome = msg.req.query.nome;\nif (nome) {\n    dados.push({ nome: nome }); // Adiciona o novo nome\n}\n\n// Atualiza msg.payload com o JSON atualizado\nmsg.payload = JSON.stringify(dados, null, 2); // Formatação legível\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -222,7 +238,7 @@
         "type": "file in",
         "z": "7a48eb7c067770d6",
         "name": "",
-        "filename": "C:\\Users\\guitg\\OneDrive\\Desktop\\senai\\paises.json",
+        "filename": "C:\\Users\\guitg\\OneDrive\\Desktop\\psn\\paises.json",
         "filenameType": "str",
         "format": "utf8",
         "chunk": false,
@@ -263,5 +279,190 @@
         "x": 690,
         "y": 500,
         "wires": []
+    },
+    {
+        "id": "1a2b3c4d5e6f7g8h",
+        "type": "http in",
+        "z": "f642ecb3a07b094e",
+        "name": "Recebe AFK",
+        "url": "/AFK",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 330,
+        "y": 220,
+        "wires": [
+            [
+                "json1"
+            ]
+        ]
+    },
+    {
+        "id": "json1",
+        "type": "json",
+        "z": "f642ecb3a07b094e",
+        "name": "Parse JSON",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 330,
+        "y": 280,
+        "wires": [
+            [
+                "pegarID"
+            ]
+        ]
+    },
+    {
+        "id": "pegarID",
+        "type": "function",
+        "z": "f642ecb3a07b094e",
+        "name": "Pega jogadorId",
+        "func": "msg.jogadorId = msg.payload.jogadorId;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 340,
+        "wires": [
+            [
+                "lerArquivo"
+            ]
+        ]
+    },
+    {
+        "id": "lerArquivo",
+        "type": "file in",
+        "z": "f642ecb3a07b094e",
+        "name": "",
+        "filename": "banco.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "sendError": true,
+        "allProps": false,
+        "x": 310,
+        "y": 400,
+        "wires": [
+            [
+                "json2"
+            ]
+        ]
+    },
+    {
+        "id": "json2",
+        "type": "json",
+        "z": "f642ecb3a07b094e",
+        "name": "Parse para array",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 330,
+        "y": 460,
+        "wires": [
+            [
+                "removerJogador"
+            ]
+        ]
+    },
+    {
+        "id": "removerJogador",
+        "type": "function",
+        "z": "f642ecb3a07b094e",
+        "name": "Remove jogador",
+        "func": "let jogadores = msg.payload;\nlet remover = msg.jogadorId;\n\njogadores = jogadores.filter(jogador => jogador.nome !== remover);\n\nmsg.payload = JSON.stringify(jogadores, null, 2);\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 520,
+        "wires": [
+            [
+                "salvarArquivo"
+            ]
+        ]
+    },
+    {
+        "id": "salvarArquivo",
+        "type": "file",
+        "z": "f642ecb3a07b094e",
+        "name": "",
+        "filename": "banco.json",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 330,
+        "y": 580,
+        "wires": [
+            [
+                "resposta"
+            ]
+        ]
+    },
+    {
+        "id": "resposta",
+        "type": "http response",
+        "z": "f642ecb3a07b094e",
+        "name": "Resposta OK",
+        "statusCode": "",
+        "headers": {},
+        "x": 330,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "293d5fa4038e3672",
+        "type": "http in",
+        "z": "274466637d8ee6a7",
+        "name": "",
+        "url": "/sinal",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "a30632b570e949b6"
+            ]
+        ]
+    },
+    {
+        "id": "63711f5ed21f3dd4",
+        "type": "http response",
+        "z": "274466637d8ee6a7",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 150,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "a30632b570e949b6",
+        "type": "function",
+        "z": "274466637d8ee6a7",
+        "name": "function 2",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 140,
+        "y": 140,
+        "wires": [
+            [
+                "63711f5ed21f3dd4"
+            ]
+        ]
     }
 ]
