@@ -36,7 +36,7 @@
         "type": "function",
         "z": "f0c65390ea861234",
         "name": "function 1",
-        "func": "let dados;\n\n// Tenta processar os dados do arquivo\ntry {\n    let jsonString = msg.payload.trim(); \n    let jsonObjeto = JSON.parse(jsonString); // Converte de volta para objeto\n\n    if (!Array.isArray(jsonObjeto)) {\n        jsonObjeto = [jsonObjeto]; // Se não for array, transforma em array\n    }\n\n    // Junta todos os dados em um único array\n    dados = jsonObjeto.reduce((listaJSON, item) => {\n        if (item.nome) {\n            listaJSON.push({ nome: item.nome });\n        }\n        return listaJSON;\n    }, []);\n    \n} catch (e) {\n    dados = []; // Caso de erro, cria um array vazio\n}\n\n// Adiciona o nome enviado pela URL\nlet nome = msg.req.query.nome;\nif (nome) {\n    dados.push({ nome: nome }); // Adiciona o novo nome\n}\n\n// Atualiza msg.payload com o JSON atualizado\nmsg.payload = JSON.stringify(dados, null, 2); // Formatação legível\n\nreturn msg;\n",
+        "func": "let dados;\n\n// Tenta processar os dados do arquivo\ntry {\n    let jsonString = msg.payload.trim(); \n    let jsonObjeto = JSON.parse(jsonString); // Converte de volta para objeto\n\n    if (!Array.isArray(jsonObjeto)) {\n        jsonObjeto = [jsonObjeto]; // Se não for array, transforma em array\n    }\n\n    // Junta todos os dados em um único array\n    dados = jsonObjeto.reduce((listaJSON, item) => {\n        if (item.nome) {\n            listaJSON.push({ nome: item.nome });\n        }\n        return listaJSON;\n    }, []);\n    \n} catch (e) {\n    dados = []; // Caso de erro, cria um array vazio\n}\n\n// Adiciona o nome enviado pela URL\nlet nome = msg.req.query.nome;\nif (nome) {\n    dados.push({ nome: nome }); // Adiciona o novo nome\n}\ndados = dados.filter(nome => nome.nome !== \"nomeADM123\")\n\n// Atualiza msg.payload com o JSON atualizado\nmsg.payload = JSON.stringify(dados, null, 2); // Formatação legível\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -238,14 +238,14 @@
         "type": "file in",
         "z": "7a48eb7c067770d6",
         "name": "",
-        "filename": "C:\\Users\\guitg\\OneDrive\\Desktop\\psn\\paises.json",
+        "filename": "C:\\Users\\Aluno\\Desktop\\Dev\\paises.json",
         "filenameType": "str",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 810,
+        "x": 780,
         "y": 360,
         "wires": [
             [
@@ -309,7 +309,8 @@
         "y": 280,
         "wires": [
             [
-                "pegarID"
+                "pegarID",
+                "62bf0f52eb014e65"
             ]
         ]
     },
@@ -318,7 +319,7 @@
         "type": "function",
         "z": "f642ecb3a07b094e",
         "name": "Pega jogadorId",
-        "func": "msg.jogadorId = msg.payload.jogadorId;\nreturn msg;",
+        "func": "// Ajuste para pegar o nome correto de jogadorId\nmsg.jogadorId = msg.payload.nome ? msg.payload.nome.nome : msg.payload.nome;\nreturn msg;\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -329,7 +330,8 @@
         "y": 340,
         "wires": [
             [
-                "lerArquivo"
+                "lerArquivo",
+                "62bf0f52eb014e65"
             ]
         ]
     },
@@ -347,7 +349,8 @@
         "y": 400,
         "wires": [
             [
-                "json2"
+                "json2",
+                "62bf0f52eb014e65"
             ]
         ]
     },
@@ -372,7 +375,7 @@
         "type": "function",
         "z": "f642ecb3a07b094e",
         "name": "Remove jogador",
-        "func": "let jogadores = msg.payload;\nlet remover = msg.jogadorId;\n\njogadores = jogadores.filter(jogador => jogador.nome !== remover);\n\nmsg.payload = JSON.stringify(jogadores, null, 2);\nreturn msg;",
+        "func": "// Verificar se msg.payload é uma string e convertê-lo para um array\nlet jogadores = typeof msg.payload === 'string' ? JSON.parse(msg.payload) : msg.payload;\n\n// Verificar se msg.jogadorId está no formato correto (objeto ou string)\nlet jogadorId = typeof msg.jogadorId === 'object' && msg.jogadorId !== null && msg.jogadorId.nome ? msg.jogadorId.nome : msg.jogadorId;\n\n// Filtra para remover pelo nome\njogadores = jogadores.filter(jogador => jogador.nome !== jogadorId);\n\nmsg.payload = JSON.stringify(jogadores, null, 2);\nreturn msg;\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -383,7 +386,8 @@
         "y": 520,
         "wires": [
             [
-                "salvarArquivo"
+                "salvarArquivo",
+                "62bf0f52eb014e65"
             ]
         ]
     },
@@ -402,7 +406,8 @@
         "y": 580,
         "wires": [
             [
-                "resposta"
+                "resposta",
+                "62bf0f52eb014e65"
             ]
         ]
     },
@@ -418,6 +423,22 @@
         "wires": []
     },
     {
+        "id": "62bf0f52eb014e65",
+        "type": "debug",
+        "z": "f642ecb3a07b094e",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 380,
+        "wires": []
+    },
+    {
         "id": "293d5fa4038e3672",
         "type": "http in",
         "z": "274466637d8ee6a7",
@@ -430,27 +451,44 @@
         "y": 80,
         "wires": [
             [
-                "a30632b570e949b6"
+                "a53506b11642cec8"
             ]
         ]
     },
     {
-        "id": "63711f5ed21f3dd4",
+        "id": "b044dfae799577fc",
+        "type": "http in",
+        "z": "274466637d8ee6a7",
+        "name": "",
+        "url": "/reposta",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 470,
+        "y": 80,
+        "wires": [
+            [
+                "41c270a6f7ca8186"
+            ]
+        ]
+    },
+    {
+        "id": "ad8e96f0dcd97a0a",
         "type": "http response",
         "z": "274466637d8ee6a7",
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 150,
-        "y": 200,
+        "x": 130,
+        "y": 220,
         "wires": []
     },
     {
-        "id": "a30632b570e949b6",
+        "id": "a53506b11642cec8",
         "type": "function",
         "z": "274466637d8ee6a7",
-        "name": "function 2",
-        "func": "\nreturn msg;",
+        "name": "function 3",
+        "func": "flow.set(\"sinal\", msg.req.query.sinal === \"true\");\nmsg.payload = { status: \"ok\" };\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -458,11 +496,60 @@
         "finalize": "",
         "libs": [],
         "x": 140,
-        "y": 140,
+        "y": 160,
         "wires": [
             [
-                "63711f5ed21f3dd4"
+                "89329ef3d51b4bd8",
+                "ad8e96f0dcd97a0a"
             ]
         ]
+    },
+    {
+        "id": "89329ef3d51b4bd8",
+        "type": "debug",
+        "z": "274466637d8ee6a7",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "41c270a6f7ca8186",
+        "type": "function",
+        "z": "274466637d8ee6a7",
+        "name": "function 2",
+        "func": "const sinal = flow.get(\"sinal\") || false;\nmsg.payload = { sinal };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 160,
+        "wires": [
+            [
+                "89329ef3d51b4bd8",
+                "5458e26c8872b72c"
+            ]
+        ]
+    },
+    {
+        "id": "5458e26c8872b72c",
+        "type": "http response",
+        "z": "274466637d8ee6a7",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 450,
+        "y": 220,
+        "wires": []
     }
 ]
