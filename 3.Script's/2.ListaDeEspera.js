@@ -48,8 +48,10 @@ function s(){
   })
 }
 
-if(sinal){
-  window.location.replace("../1.Espera-Jogo/jogo.html");
-}
+setInterval(() => {
+  if (sinal) {
+    window.location.replace("../2.fim/final.html");
+  }
+}, 250);
 setInterval(dados, 2500);
 setInterval(s, 250);
