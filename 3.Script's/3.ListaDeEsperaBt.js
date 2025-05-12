@@ -47,4 +47,24 @@ function ordem(){
     }
   })
 }
+
+function s(){
+  fetch("https://d409-200-206-76-106.ngrok-free.app/reposta", {
+    method: 'GET',
+    headers: {
+        'ngrok-skip-browser-warning': 'true' 
+    }
+  })
+
+    .then(response => response.json())
+    .then(data =>{
+      sinal =data
+  })
+}
+
+if(sinal){
+  window.location.replace("../2.fim/final.html");
+}
+
 setInterval(dados, 2500);
+setInterval(s, 250);

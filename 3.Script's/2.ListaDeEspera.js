@@ -49,7 +49,7 @@ function s(){
 }
 
 if(sinal){
-  window.location.replace("../1.Espera-Jogo/indexEsperaSem.html");
+  window.location.replace("../1.Espera-Jogo/jogo.html");
 }
 setInterval(dados, 2500);
 setInterval(s, 250);
