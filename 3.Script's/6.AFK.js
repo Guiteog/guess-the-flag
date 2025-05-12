@@ -4,10 +4,10 @@ let nome = JSON.parse(localStorage.getItem("Jogador"));
 
 //Motivo da Desconexão
 function desconectar(motivo) {
-  fetch("https://39ae-2804-d43-2b2b-4500-4063-d464-b59c-c5a2.ngrok-free.app/AFK", { //Conexão do servidor
+  fetch("https://d409-200-206-76-106.ngrok-free.app/AFK", { //Conexão do servidor
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ jogadorId: nome.nome, motivo })
+    body: JSON.stringify({ jogadorId: nome.nome})
   });
   window.location.replace("../index.html");
 }
@@ -23,7 +23,7 @@ document.addEventListener("visibilitychange", () => {
 
 // Fecha aba ou atualiza
 window.addEventListener("beforeunload", () => {
-  navigator.sendBeacon("https://b94a-2804-14c-bf22-9846-d5e1-168a-75c9-ff6b.ngrok-free.app/AFK", JSON.stringify({ jogadorId: nome.nome, motivo: "saiu_da_aba" }));
+  navigator.sendBeacon("https://d409-200-206-76-106.ngrok-free.app/AFK", JSON.stringify({ jogadorId: nome.nome}));
   window.location.replace("../index.html");;
 });
 
