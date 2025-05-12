@@ -58,7 +58,12 @@ function s(){
 
     .then(response => response.json())
     .then(data =>{
-      sinal =data.sinal
+      if (data.sinal === true){
+        sinal = data.sinal
+      }
+      else{
+        sinal = false
+      }
   })
 }
 
