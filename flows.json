@@ -8,6 +8,14 @@
         "env": []
     },
     {
+        "id": "7a48eb7c067770d6",
+        "type": "tab",
+        "label": "Paises",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "013a246f0cd65995",
         "type": "function",
         "z": "f0c65390ea861234",
@@ -191,5 +199,69 @@
                 "1d98be6065b57615"
             ]
         ]
+    },
+    {
+        "id": "43aab3c4dd4f9eb0",
+        "type": "http in",
+        "z": "7a48eb7c067770d6",
+        "name": "",
+        "url": "/paises",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 690,
+        "y": 300,
+        "wires": [
+            [
+                "0c951ca14e290072"
+            ]
+        ]
+    },
+    {
+        "id": "0c951ca14e290072",
+        "type": "file in",
+        "z": "7a48eb7c067770d6",
+        "name": "",
+        "filename": "C:\\Users\\guitg\\OneDrive\\Desktop\\senai\\paises.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 810,
+        "y": 360,
+        "wires": [
+            [
+                "21217c6601e751b4"
+            ]
+        ]
+    },
+    {
+        "id": "21217c6601e751b4",
+        "type": "json",
+        "z": "7a48eb7c067770d6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 690,
+        "y": 420,
+        "wires": [
+            [
+                "ede4493cd13e0ef2"
+            ]
+        ]
+    },
+    {
+        "id": "ede4493cd13e0ef2",
+        "type": "http response",
+        "z": "7a48eb7c067770d6",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 690,
+        "y": 500,
+        "wires": []
     }
 ]
