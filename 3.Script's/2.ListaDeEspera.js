@@ -50,7 +50,7 @@ function s(){
 
 setInterval(() => {
   if (sinal) {
-    window.location.replace("../1.Espera-jogo/jogo.html");
+    window.location.replace("../1.Espera-Jogo/jogo.html");
     
   }
 }, 250);
