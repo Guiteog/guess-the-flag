@@ -59,7 +59,15 @@ function s(){
     .then(response => response.json())
     .then(data =>{
       if (data.sinal === true){
+        fetch(`https://d409-200-206-76-106.ngrok-free.app/sinal?sinal=false`, {
+          method: 'GET',
+          headers: {
+              'ngrok-skip-browser-warning': 'true' 
+          }
+        })
         sinal = data.sinal
+
+        
       }
       else{
         sinal = false

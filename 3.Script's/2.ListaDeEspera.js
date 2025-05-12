@@ -50,7 +50,8 @@ function s(){
 
 setInterval(() => {
   if (sinal) {
-    window.location.replace("../2.fim/final.html");
+    window.location.replace("../1.Espera-jogo/jogo.html");
+    
   }
 }, 250);
 setInterval(dados, 2500);
