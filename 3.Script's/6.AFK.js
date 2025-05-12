@@ -23,7 +23,7 @@ document.addEventListener("visibilitychange", () => {
 
 // Fecha aba ou atualiza
 window.addEventListener("beforeunload", () => {
-  navigator.sendBeacon("/desconectar", JSON.stringify({ nome }));
+  navigator.sendBeacon("https://d409-200-206-76-106.ngrok-free.app/AFK", JSON.stringify({ nome }));
 });
 
 
