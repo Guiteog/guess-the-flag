@@ -44,7 +44,7 @@ function s(){
 
     .then(response => response.json())
     .then(data =>{
-      sinal =data
+      sinal =data.sinal;
   })
 }
 
