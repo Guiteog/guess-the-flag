@@ -23,9 +23,9 @@ document.addEventListener("visibilitychange", () => {
 
 // Fecha aba ou atualiza
 window.addEventListener("beforeunload", () => {
-  navigator.sendBeacon("https://d409-200-206-76-106.ngrok-free.app/AFK", JSON.stringify({ jogadorId: nome.nome}));
-  window.location.replace("../index.html");;
+  navigator.sendBeacon("/desconectar", JSON.stringify({ nome }));
 });
+
 
 // Inatividade
 let timeoutInatividade = setTimeout(() => desconectar("inatividade"), tempoLimite);
