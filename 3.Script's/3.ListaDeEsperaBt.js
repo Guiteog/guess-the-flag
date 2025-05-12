@@ -47,7 +47,7 @@ function ordem(){
     }
   })
 }
-
+let sinal = false;
 function s(){
   fetch("https://d409-200-206-76-106.ngrok-free.app/reposta", {
     method: 'GET',
