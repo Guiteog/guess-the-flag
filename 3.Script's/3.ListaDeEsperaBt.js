@@ -40,7 +40,7 @@ function updatePlayerList(players) {
 }
 
 function ordem(){
-  fetch(`https://d409-200-206-76-106.ngrok-free.app/sinal?sinal=${True}`, {
+  fetch(`https://d409-200-206-76-106.ngrok-free.app/sinal?sinal=true`, {
     method: 'GET',
     headers: {
         'ngrok-skip-browser-warning': 'true' 
@@ -62,9 +62,11 @@ function s(){
   })
 }
 
-if(sinal){
-  window.location.replace("../2.fim/final.html");
-}
+setInterval(() => {
+  if (sinal) {
+    window.location.replace("../2.fim/final.html");
+  }
+}, 250);
 
 setInterval(dados, 2500);
 setInterval(s, 250);
