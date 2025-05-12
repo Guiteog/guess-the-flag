@@ -56,13 +56,14 @@ function s(){
     }
   })
 
-  .then(response => response.json())
-  .then(data => {
-    if (data && data.sinal === true) {
-      sinal = true;
-    } else {
-      sinal = false;
-    }
+    .then(response => response.json())
+    .then(data =>{
+      if (data.sinal === true){
+        sinal = data.sinal
+      }
+      else{
+        sinal = false
+      }
   })
 }
 

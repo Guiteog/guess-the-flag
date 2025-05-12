@@ -2,20 +2,20 @@ let tempoLimite = 60000;
 let tempoAFK = null;
 let nome = JSON.parse(localStorage.getItem("Jogador"));
 
-//Motivo da Desconexão
-function desconectar() {
-  fetch("https://d409-200-206-76-106.ngrok-free.app/AFK", { //Conexão do servidor
+// Motivo da desconexão
+function desconectar(motivo = "AFK") {
+  fetch("https://d409-200-206-76-106.ngrok-free.app/AFK", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ jogadorId: nome.nome})
+    body: JSON.stringify({ jogadorId: nome.nome, motivo })
   });
   window.location.replace("../index.html");
 }
 
-// Minimizar a tela 
+// Minimizar a aba ou trocar de app
 document.addEventListener("visibilitychange", () => {
-  if (document.hidden) {//verifica como está a aba
-    tempoAFK = setTimeout(() => desconectar("Minimizar"), tempoLimite);//tempoLimite indica que em 60 segundos irar desconectar o jogador
+  if (document.hidden) {
+    tempoAFK = setTimeout(() => desconectar("Minimizou"), tempoLimite);
   } else {
     clearTimeout(tempoAFK);
   }
@@ -23,18 +23,18 @@ document.addEventListener("visibilitychange", () => {
 
 // Fecha aba ou atualiza
 window.addEventListener("beforeunload", () => {
-  navigator.sendBeacon("https://d409-200-206-76-106.ngrok-free.app/AFK", JSON.stringify({ nome }));
-  window.location.replace("index.html");
+  navigator.sendBeacon(
+    "https://d409-200-206-76-106.ngrok-free.app/AFK",
+    JSON.stringify({ jogadorId: nome.nome, motivo: "Saiu ou atualizou" })
+  );
+  // Não use window.location.replace aqui
 });
 
-
 // Inatividade
-let timeoutInatividade = setTimeout(() => desconectar("inatividade"), tempoLimite);
+let timeoutInatividade = setTimeout(() => desconectar("Inatividade"), tempoLimite);
 ["mousemove", "keydown", "touchstart"].forEach(evt =>
   document.addEventListener(evt, () => {
     clearTimeout(timeoutInatividade);
-    timeoutInatividade = setTimeout(() => desconectar("inatividade"), tempoLimite);
+    timeoutInatividade = setTimeout(() => desconectar("Inatividade"), tempoLimite);
   })
 );
-
-
