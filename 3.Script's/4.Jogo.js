@@ -20,7 +20,7 @@ let round = 0;
 
 
 //pegar todos os dados da API e Amazerna dentro de uma variavel
-fetch('https://d409-200-206-76-106.ngrok-free.app/paises', {
+fetch('https://bfa4-200-211-208-194.ngrok-free.app/paises', {
     method: 'GET',
     headers: {
         'ngrok-skip-browser-warning': 'true' 

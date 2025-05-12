@@ -35,7 +35,7 @@ function updatePlayerList(players) {
 let sinal = false;
 
 function s(){
-  fetch("https://d409-200-206-76-106.ngrok-free.app/reposta", {
+  fetch("https://bfa4-200-211-208-194.ngrok-free.app/reposta", {
     method: 'GET',
     headers: {
         'ngrok-skip-browser-warning': 'true' 
