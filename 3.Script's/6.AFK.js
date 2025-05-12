@@ -3,7 +3,7 @@ let tempoAFK = null;
 let nome = JSON.parse(localStorage.getItem("Jogador"));
 
 //Motivo da Desconexão
-function desconectar(motivo) {
+function desconectar() {
   fetch("https://d409-200-206-76-106.ngrok-free.app/AFK", { //Conexão do servidor
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -24,6 +24,7 @@ document.addEventListener("visibilitychange", () => {
 // Fecha aba ou atualiza
 window.addEventListener("beforeunload", () => {
   navigator.sendBeacon("https://d409-200-206-76-106.ngrok-free.app/AFK", JSON.stringify({ nome }));
+  window.location.replace("index.html");
 });
 
 
