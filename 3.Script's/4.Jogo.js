@@ -14,13 +14,13 @@ let randomIndex= [];
 let paisSorteado= [];
 let paises = [];
 let round = 0;
-
+let sinal = true;
 //.flags.png; caminho da bandeira
 //.translations.por.common; caminho para achar o país
 
 
 //pegar todos os dados da API e Amazerna dentro de uma variavel
-fetch('https://d482-200-206-76-106.ngrok-free.app/paises', {
+fetch('https://9c64-200-211-208-194.ngrok-free.app/paises', {
     method: 'GET',
     headers: {
         'ngrok-skip-browser-warning': 'true' 
@@ -118,6 +118,7 @@ function ponts(event) {
     setTimeout(() => {
         if(round === 9){
             dados()
+            sinal = false;
             window.location.replace("./final.html");
         }
         pontuacaoElemento.style.color = "";
@@ -132,10 +133,18 @@ function dados(){
     let dados = localStorage.getItem("Jogador");
     jogador = dados ? JSON.parse(dados) : {};
     jogador.pontuacao = pontuacao;
-    
+    jogador.tempo = tempo;
     localStorage.setItem("Jogador", JSON.stringify(jogador));
 
 
 }
-
+let tempo= 0;
+let segundos = 0;
+let minutos = 0;
 //-----------------Cronometro---------------------//
+while(sinal){
+    segundos += 1;
+    if(segundos % 60){
+
+    }
+};

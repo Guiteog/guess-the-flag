@@ -6,7 +6,7 @@ let players;
 //pegar dados dos players
 function dados(){
          
-  fetch("https://d482-200-206-76-106.ngrok-free.app/retornadados", {
+  fetch("https://9c64-200-211-208-194.ngrok-free.app/retornadados", {
     method: 'GET',
     headers: {
         'ngrok-skip-browser-warning': 'true' 
@@ -35,7 +35,7 @@ function updatePlayerList(players) {
 let sinal = false;
 
 function s(){
-  fetch("https://d482-200-206-76-106.ngrok-free.app/reposta", {
+  fetch("https://9c64-200-211-208-194.ngrok-free.app/reposta", {
     method: 'GET',
     headers: {
         'ngrok-skip-browser-warning': 'true' 
@@ -54,5 +54,5 @@ setInterval(() => {
     
   }
 }, 250);
-setInterval(dados, 10000);
+setInterval(dados, 5000);
 setInterval(s, 10000);
