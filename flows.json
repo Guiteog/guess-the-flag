@@ -217,6 +217,74 @@
         ]
     },
     {
+        "id": "668db2e5a533105f",
+        "type": "http in",
+        "z": "f0c65390ea861234",
+        "name": "",
+        "url": "/dadosjogador",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 410,
+        "y": 320,
+        "wires": [
+            [
+                "433249c2b63e7a7d"
+            ]
+        ]
+    },
+    {
+        "id": "be1492ab09c3e1f2",
+        "type": "http response",
+        "z": "f0c65390ea861234",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1390,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "433249c2b63e7a7d",
+        "type": "file in",
+        "z": "f0c65390ea861234",
+        "name": "",
+        "filename": "banco.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 610,
+        "y": 320,
+        "wires": [
+            [
+                "8a3a9a330f6edbae"
+            ]
+        ]
+    },
+    {
+        "id": "8a3a9a330f6edbae",
+        "type": "function",
+        "z": "f0c65390ea861234",
+        "name": "ranking",
+        "func": "let dados;\n\ntry {\n    let jsonString = msg.payload.trim();\n    let jsonObjeto = JSON.parse(jsonString);\n    if (!Array.isArray(jsonObjeto)) jsonObjeto = [jsonObjeto];\n\n    dados = jsonObjeto;\n} catch (e) {\n    dados = [];\n}\n\nlet nome = msg.req.query.nome;\nlet pontos = parseInt(msg.req.query.pontos);\nlet tempo = parseFloat(msg.req.query.tempo);\n\nif (nome) {\n    let jogador = dados.find(j => j.nome === nome);\n    if (jogador) {\n        if (!isNaN(pontos)) jogador.pontos = pontos;\n        if (!isNaN(tempo)) jogador.tempo = tempo;\n    } else {\n        dados.push({\n            nome: nome,\n            pontos: !isNaN(pontos) ? pontos : 0,\n            tempo: !isNaN(tempo) ? tempo : 0\n        });\n    }\n}\n\n// Remove nomeADM123 se necessário\ndados = dados.filter(j => j.nome !== \"nomeADM123\");\n\nmsg.payload = JSON.stringify(dados, null, 2);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 320,
+        "wires": [
+            [
+                "be1492ab09c3e1f2"
+            ]
+        ]
+    },
+    {
         "id": "43aab3c4dd4f9eb0",
         "type": "http in",
         "z": "7a48eb7c067770d6",
