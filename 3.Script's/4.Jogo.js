@@ -8,6 +8,7 @@ let img = document.getElementById('bandeira'); //IMG onde vai mostrar a bandeira
 let nome_pais = document.querySelector('h2'); //Resposta do a amostra para saber o nome do País 
 let botoes = document.querySelectorAll('.button'); // Resposta do cliente
 let pontuacaoElemento = document.getElementById('pts_jogo'); //Valor do pts
+let tempoElemento = document.getElementById('cronometro');
 let pontuacao = 0; 
 let nomeButtons = [];//lista para colocar os paises
 let randomIndex= [];
@@ -119,7 +120,7 @@ function ponts(event) {
         if(round === 9){
             dados()
             sinal = false;
-            window.location.replace("./final.html");
+            window.location.replace("../2.fim/final.html");
         }
         pontuacaoElemento.style.color = "";
         button()
@@ -142,9 +143,19 @@ let tempo= 0;
 let segundos = 0;
 let minutos = 0;
 //-----------------Cronometro---------------------//
-while(sinal){
-    segundos += 1;
-    if(segundos % 60){
+function cronometroFC(){   
+    if(sinal){
+        segundos++
+        tempo = segundos;
 
+        if(segundos % 60 === 0){
+            minutos ++
+            segundos = 0;
+        }
     }
+
+    tempoElemento.innerText = `${String(minutos).padStart(2,"0")}:${String(segundos).padStart(2,"0")}`
+
 };
+
+setInterval(cronometroFC,1000);
