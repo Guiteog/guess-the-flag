@@ -1,10 +1,28 @@
 
   
 function exibirResultados() {
-  let jogador = localStorage.getItem("Jogador");
-  jogador = jogador ? JSON.parse(jogador) : {nome: none, pontuacao:none}; 
-  let rank = document.getElementById('scoreboard');
-  rank.innerHTML = `Nome: ${jogador.nome} Pontos: ${jogador.pontuacao}`;
+  try {
+    const resposta = await fetch(`https://9c64-200-211-208-194.ngrok-free.app/dados?nome=${nome.value}`, {
+        method: 'GET',
+        headers: {
+            'ngrok-skip-browser-warning': 'true' 
+        }
+    })
+        if(!resposta.ok){
+            throw new Error("Erro na requisição");
+        }
+
+        if(nome.value === nomeADM ){
+            window.location.replace("../1.Espera-Jogo/indexEspera.html");
+        }
+       
+        else{
+            window.location.replace("../1.Espera-Jogo/indexEsperaSem.html");
+        }
+}
+  catch (erro) {
+    console.error("Erro ao enviar dados:", erro);
+}
   
   
 }
