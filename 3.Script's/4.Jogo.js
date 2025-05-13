@@ -146,9 +146,9 @@ let minutos = 0;
 function cronometroFC(){   
     if(sinal){
         segundos++
-        tempo = segundos;
+        tempo ++;
 
-        if(segundos % 60 === 0){
+        if(segundos === 60){
             minutos ++
             segundos = 0;
         }
