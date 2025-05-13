@@ -5,37 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess The Flag</title>
     <link rel="shortcut icon" href="./img/logoweb.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="./4.CSS/1.styleLogin.css">
+    <link rel="stylesheet" href="styleLogin.css">
 </head>
 <body>
-    <!-- Cabeçario -->
-    <header class="menu">
+    <div class="container">
+        <h1 class="titulo">GTF</h1>
+        <p class="subtitulo">GUESS THE FLAG</p>
 
-        <nav>
-            <ul>
+        <!-- Globo iluminado -->
+        <div id="img_logo">
+            <img src="/img/2.svg" alt="Globo" width="65%" >
+        </div>
 
-                <!-- Imagem da bandeira -->
-                <li id="img_logo"><img src="./img/logo.svg"></li>
-
-            </ul>
-        </nav>
-
-    </header>
-    
-    <!-- Imagem da GTF no centro da tela -->
-    <li id="img_logoc"><img src="./img/globo.png"></li>
-
-
-    <!-- Digite seu nome -->
-     <div class ="seu_nome">
-
-        <label for="seu_nome">Login:</label>
+        <!-- Input e botão -->
         <input type="text" id="seu_nome" name="seu_nome" placeholder="Digite seu nome...">
-
-        <!-- Botão de enviar -->
-        <button onclick="dados()" class="botao-enviar">Enviar</button>
+        <button onclick="dados()" class="botao-enviar">JOGAR AGORA</button>
     </div>
-    <script src="./3.Script's/1.Login.js"></script>
-   
 
+    <script src="./3.Script's/1.Login.js"></script>
 </body>
+</html>
