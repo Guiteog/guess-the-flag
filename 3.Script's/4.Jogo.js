@@ -8,19 +8,20 @@ let img = document.getElementById('bandeira'); //IMG onde vai mostrar a bandeira
 let nome_pais = document.querySelector('h2'); //Resposta do a amostra para saber o nome do País 
 let botoes = document.querySelectorAll('.button'); // Resposta do cliente
 let pontuacaoElemento = document.getElementById('pts_jogo'); //Valor do pts
+let tempoElemento = document.getElementById('cronometro');
 let pontuacao = 0; 
 let nomeButtons = [];//lista para colocar os paises
 let randomIndex= [];
 let paisSorteado= [];
 let paises = [];
 let round = 0;
-
+let sinal = true;
 //.flags.png; caminho da bandeira
 //.translations.por.common; caminho para achar o país
 
 
 //pegar todos os dados da API e Amazerna dentro de uma variavel
-fetch('https://6497-200-206-76-106.ngrok-free.app/paises', {
+fetch('https://9c64-200-211-208-194.ngrok-free.app/paises', {
     method: 'GET',
     headers: {
         'ngrok-skip-browser-warning': 'true' 
@@ -118,7 +119,8 @@ function ponts(event) {
     setTimeout(() => {
         if(round === 9){
             dados()
-            window.location.replace("./final.html");
+            sinal = false;
+            window.location.replace("../2.fim/final.html");
         }
         pontuacaoElemento.style.color = "";
         button()
@@ -132,10 +134,28 @@ function dados(){
     let dados = localStorage.getItem("Jogador");
     jogador = dados ? JSON.parse(dados) : {};
     jogador.pontuacao = pontuacao;
-    
+    jogador.tempo = tempo;
     localStorage.setItem("Jogador", JSON.stringify(jogador));
 
 
 }
-
+let tempo= 0;
+let segundos = 0;
+let minutos = 0;
 //-----------------Cronometro---------------------//
+function cronometroFC(){   
+    if(sinal){
+        segundos++
+        tempo = segundos;
+
+        if(segundos % 60 === 0){
+            minutos ++
+            segundos = 0;
+        }
+    }
+
+    tempoElemento.innerText = `${String(minutos).padStart(2,"0")}:${String(segundos).padStart(2,"0")}`
+
+};
+
+setInterval(cronometroFC,1000);
