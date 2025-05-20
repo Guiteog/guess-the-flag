@@ -62,4 +62,3 @@ setInterval(() => {
   }
 }, 250);
 
-setInterval(s, 10000);
