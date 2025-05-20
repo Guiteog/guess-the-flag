@@ -3,23 +3,25 @@ const list = document.getElementById('playersList');
 const startBtn = document.getElementById('startBtn');
 let players;
 
+//Link wss
+const wsResposta ="wss://f04a-200-211-208-194.ngrok-free.app/ws/reposta";//Sinal para a troca de pagina
+const wsJogadores ="wss://f04a-200-211-208-194.ngrok-free.app/ws/retornadados";//
+
+
 //pegar dados dos players
-function dados(){
-         
-  fetch("https://9c64-200-211-208-194.ngrok-free.app/retornadados", {
-    method: 'GET',
-    headers: {
-        'ngrok-skip-browser-warning': 'true' 
-    }
-})
-    .then(response => response.json())
-    .then(data =>{
-        players = data;
-        updatePlayerList(players);
-    })
+wsJogadores.onmessage = (event) => {
+  players = JSON.parse(event.data);
+  updatePlayerList(players)
 }
 
-// Simula nova entrada de jogadores
+//Espera do sinal
+wsResposta.onmessage = (event) => {
+  sinalJSON = JSON.parse(event.data)
+  sinal = sinalJSON.sinal
+}
+
+
+// Adiciona 
 function updatePlayerList(players) {
   list.innerHTML = ""; // Limpa
 
@@ -32,21 +34,7 @@ function updatePlayerList(players) {
   });
 }
 
-let sinal = false;
 
-function s(){
-  fetch("https://9c64-200-211-208-194.ngrok-free.app/reposta", {
-    method: 'GET',
-    headers: {
-        'ngrok-skip-browser-warning': 'true' 
-    }
-  })
-
-    .then(response => response.json())
-    .then(data =>{
-      sinal =data.sinal;
-  })
-}
 
 setInterval(() => {
   if (sinal) {
@@ -54,5 +42,3 @@ setInterval(() => {
     
   }
 }, 250);
-setInterval(dados, 5000);
-setInterval(s, 10000);
