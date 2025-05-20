@@ -21,7 +21,7 @@ let sinal = true;
 
 
 //pegar todos os dados da API e Amazerna dentro de uma variavel
-fetch('https://9c64-200-211-208-194.ngrok-free.app/paises', {
+fetch('https://f04a-200-211-208-194.ngrok-free.app/paises', {
     method: 'GET',
     headers: {
         'ngrok-skip-browser-warning': 'true' 

@@ -1,8 +1,7 @@
 
-  
-function exibirResultados() {
+async  function exibirResultados() {
   try {
-    const resposta = await fetch(`https://9c64-200-211-208-194.ngrok-free.app/dados?nome=${nome.value}`, {
+    const resposta = await fetch(`https://f04a-200-211-208-194.ngrok-free.app/dados?nome=${nome.value}`, {
         method: 'GET',
         headers: {
             'ngrok-skip-browser-warning': 'true' 
