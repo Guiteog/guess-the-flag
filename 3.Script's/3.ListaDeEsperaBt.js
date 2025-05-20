@@ -2,6 +2,7 @@
 const list = document.getElementById('playersList');
 const startBtn = document.getElementById('startBtn');
 let players;
+let sinal = false;
 
 //Link wss
 const wsResposta ="wss://f04a-200-211-208-194.ngrok-free.app/ws/reposta";//Sinal para a troca de pagina
