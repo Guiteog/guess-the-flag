@@ -1,6 +1,6 @@
 [
     {
-        "id": "f0c65390ea861234",
+        "id": "0158b88ad22483b7",
         "type": "tab",
         "label": "Dados",
         "disabled": false,
@@ -8,7 +8,7 @@
         "env": []
     },
     {
-        "id": "7a48eb7c067770d6",
+        "id": "6882061cf9b2929f",
         "type": "tab",
         "label": "Paises",
         "disabled": false,
@@ -16,7 +16,7 @@
         "env": []
     },
     {
-        "id": "f642ecb3a07b094e",
+        "id": "62fbdd8b78c30580",
         "type": "tab",
         "label": "AFK",
         "disabled": false,
@@ -24,7 +24,7 @@
         "env": []
     },
     {
-        "id": "274466637d8ee6a7",
+        "id": "c42e73b9cc74503b",
         "type": "tab",
         "label": "Gatilho",
         "disabled": false,
@@ -32,9 +32,24 @@
         "env": []
     },
     {
-        "id": "013a246f0cd65995",
+        "id": "0f0dfa7e638edfa9",
+        "type": "websocket-listener",
+        "path": "/ws/retornadados",
+        "wholemsg": "false"
+    },
+    {
+        "id": "ws-reposta-client",
+        "type": "websocket-client",
+        "path": "/ws/resposta",
+        "tls": "",
+        "hb": "0",
+        "subprotocol": "",
+        "headers": []
+    },
+    {
+        "id": "c01b9bc0bddef3fa",
         "type": "function",
-        "z": "f0c65390ea861234",
+        "z": "0158b88ad22483b7",
         "name": "function 1",
         "func": "let dados;\n\n// Tenta processar os dados do arquivo\ntry {\n    let jsonString = msg.payload.trim(); \n    let jsonObjeto = JSON.parse(jsonString); // Converte de volta para objeto\n\n    if (!Array.isArray(jsonObjeto)) {\n        jsonObjeto = [jsonObjeto]; // Se não for array, transforma em array\n    }\n\n    // Junta todos os dados em um único array\n    dados = jsonObjeto.reduce((listaJSON, item) => {\n        if (item.nome) {\n            listaJSON.push({ nome: item.nome });\n        }\n        return listaJSON;\n    }, []);\n    \n} catch (e) {\n    dados = []; // Caso de erro, cria um array vazio\n}\n\n// Adiciona o nome enviado pela URL\nlet nome = msg.req.query.nome;\nif (nome) {\n    dados.push({ nome: nome }); // Adiciona o novo nome\n}\ndados = dados.filter(nome => nome.nome !== \"nomeADM123\")\n\n// Atualiza msg.payload com o JSON atualizado\nmsg.payload = JSON.stringify(dados, null, 2); // Formatação legível\n\nreturn msg;\n",
         "outputs": 1,
@@ -47,14 +62,14 @@
         "y": 240,
         "wires": [
             [
-                "7a5eafc04aec4afc"
+                "ee0325f2f49d3560"
             ]
         ]
     },
     {
-        "id": "545095cb5b084a47",
+        "id": "244ec498d9401825",
         "type": "http response",
-        "z": "f0c65390ea861234",
+        "z": "0158b88ad22483b7",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -63,9 +78,9 @@
         "wires": []
     },
     {
-        "id": "8a6c3afa8a656375",
+        "id": "b9e6a062ebc8d8b8",
         "type": "http in",
-        "z": "f0c65390ea861234",
+        "z": "0158b88ad22483b7",
         "name": "",
         "url": "/dados",
         "method": "get",
@@ -75,31 +90,14 @@
         "y": 240,
         "wires": [
             [
-                "3763ed75e7224f81"
+                "0b4d5bba465f41f0"
             ]
         ]
     },
     {
-        "id": "126c40cf4cb3aeeb",
-        "type": "http in",
-        "z": "f0c65390ea861234",
-        "name": "",
-        "url": "/retornadados",
-        "method": "get",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 490,
-        "y": 100,
-        "wires": [
-            [
-                "e79db8850b605412"
-            ]
-        ]
-    },
-    {
-        "id": "e79db8850b605412",
+        "id": "d39f637f68123038",
         "type": "file in",
-        "z": "f0c65390ea861234",
+        "z": "0158b88ad22483b7",
         "name": "",
         "filename": "banco.json",
         "filenameType": "str",
@@ -112,14 +110,14 @@
         "y": 100,
         "wires": [
             [
-                "9c8dcc97ebd55f2a"
+                "51c2eb94f58bb998"
             ]
         ]
     },
     {
-        "id": "9c8dcc97ebd55f2a",
+        "id": "51c2eb94f58bb998",
         "type": "json",
-        "z": "f0c65390ea861234",
+        "z": "0158b88ad22483b7",
         "name": "",
         "property": "payload",
         "action": "obj",
@@ -128,15 +126,15 @@
         "y": 100,
         "wires": [
             [
-                "8dc604e5330868b6",
-                "1d98be6065b57615"
+                "95894d3e7c6ae166",
+                "7224f3e7d607124a"
             ]
         ]
     },
     {
-        "id": "7a5eafc04aec4afc",
+        "id": "ee0325f2f49d3560",
         "type": "file",
-        "z": "f0c65390ea861234",
+        "z": "0158b88ad22483b7",
         "name": "",
         "filename": "banco.json",
         "filenameType": "str",
@@ -148,25 +146,14 @@
         "y": 240,
         "wires": [
             [
-                "08cfeb5bed16fbfa"
+                "87c1c9c7b609ade8"
             ]
         ]
     },
     {
-        "id": "8dc604e5330868b6",
-        "type": "http response",
-        "z": "f0c65390ea861234",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1370,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "1d98be6065b57615",
+        "id": "7224f3e7d607124a",
         "type": "debug",
-        "z": "f0c65390ea861234",
+        "z": "0158b88ad22483b7",
         "name": "debug 1",
         "active": true,
         "tosidebar": true,
@@ -175,14 +162,14 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1380,
+        "x": 1400,
         "y": 160,
         "wires": []
     },
     {
-        "id": "3763ed75e7224f81",
+        "id": "0b4d5bba465f41f0",
         "type": "file in",
-        "z": "f0c65390ea861234",
+        "z": "0158b88ad22483b7",
         "name": "",
         "filename": "banco.json",
         "filenameType": "str",
@@ -195,14 +182,14 @@
         "y": 240,
         "wires": [
             [
-                "013a246f0cd65995"
+                "c01b9bc0bddef3fa"
             ]
         ]
     },
     {
-        "id": "08cfeb5bed16fbfa",
+        "id": "87c1c9c7b609ade8",
         "type": "json",
-        "z": "f0c65390ea861234",
+        "z": "0158b88ad22483b7",
         "name": "",
         "property": "payload",
         "action": "obj",
@@ -211,15 +198,15 @@
         "y": 240,
         "wires": [
             [
-                "545095cb5b084a47",
-                "1d98be6065b57615"
+                "244ec498d9401825",
+                "7224f3e7d607124a"
             ]
         ]
     },
     {
-        "id": "668db2e5a533105f",
+        "id": "d98ee3a3e310b20e",
         "type": "http in",
-        "z": "f0c65390ea861234",
+        "z": "0158b88ad22483b7",
         "name": "",
         "url": "/dadosjogador",
         "method": "get",
@@ -229,14 +216,14 @@
         "y": 320,
         "wires": [
             [
-                "433249c2b63e7a7d"
+                "cfa61dd9c6bd1ee9"
             ]
         ]
     },
     {
-        "id": "be1492ab09c3e1f2",
+        "id": "9664bfe0640986b4",
         "type": "http response",
-        "z": "f0c65390ea861234",
+        "z": "0158b88ad22483b7",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -245,9 +232,9 @@
         "wires": []
     },
     {
-        "id": "433249c2b63e7a7d",
+        "id": "cfa61dd9c6bd1ee9",
         "type": "file in",
-        "z": "f0c65390ea861234",
+        "z": "0158b88ad22483b7",
         "name": "",
         "filename": "banco.json",
         "filenameType": "str",
@@ -260,14 +247,14 @@
         "y": 320,
         "wires": [
             [
-                "8a3a9a330f6edbae"
+                "a216e3e8890e1315"
             ]
         ]
     },
     {
-        "id": "8a3a9a330f6edbae",
+        "id": "a216e3e8890e1315",
         "type": "function",
-        "z": "f0c65390ea861234",
+        "z": "0158b88ad22483b7",
         "name": "ranking",
         "func": "let dados;\n\ntry {\n    let jsonString = msg.payload.trim();\n    let jsonObjeto = JSON.parse(jsonString);\n    if (!Array.isArray(jsonObjeto)) jsonObjeto = [jsonObjeto];\n\n    dados = jsonObjeto;\n} catch (e) {\n    dados = [];\n}\n\nlet nome = msg.req.query.nome;\nlet pontos = parseInt(msg.req.query.pontos);\nlet tempo = parseFloat(msg.req.query.tempo);\n\nif (nome) {\n    let jogador = dados.find(j => j.nome === nome);\n    if (jogador) {\n        if (!isNaN(pontos)) jogador.pontos = pontos;\n        if (!isNaN(tempo)) jogador.tempo = tempo;\n    } else {\n        dados.push({\n            nome: nome,\n            pontos: !isNaN(pontos) ? pontos : 0,\n            tempo: !isNaN(tempo) ? tempo : 0\n        });\n    }\n}\n\n// Remove nomeADM123 se necessário\ndados = dados.filter(j => j.nome !== \"nomeADM123\");\n\nmsg.payload = JSON.stringify(dados, null, 2);\nreturn msg;\n",
         "outputs": 1,
@@ -280,14 +267,40 @@
         "y": 320,
         "wires": [
             [
-                "be1492ab09c3e1f2"
+                "9664bfe0640986b4"
             ]
         ]
     },
     {
-        "id": "43aab3c4dd4f9eb0",
+        "id": "d491ea9bf2d4c6b0",
+        "type": "watch",
+        "z": "0158b88ad22483b7",
+        "name": "",
+        "files": "banco.json",
+        "recursive": "",
+        "x": 380,
+        "y": 100,
+        "wires": [
+            [
+                "d39f637f68123038"
+            ]
+        ]
+    },
+    {
+        "id": "95894d3e7c6ae166",
+        "type": "websocket out",
+        "z": "0158b88ad22483b7",
+        "name": "",
+        "server": "0f0dfa7e638edfa9",
+        "client": "",
+        "x": 1440,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "f5a78af39e25687d",
         "type": "http in",
-        "z": "7a48eb7c067770d6",
+        "z": "6882061cf9b2929f",
         "name": "",
         "url": "/paises",
         "method": "get",
@@ -297,34 +310,34 @@
         "y": 300,
         "wires": [
             [
-                "0c951ca14e290072"
+                "9ba98cf8abeb6a15"
             ]
         ]
     },
     {
-        "id": "0c951ca14e290072",
+        "id": "9ba98cf8abeb6a15",
         "type": "file in",
-        "z": "7a48eb7c067770d6",
+        "z": "6882061cf9b2929f",
         "name": "",
-        "filename": "C:\\Users\\Aluno\\Desktop\\Dev\\paises.json",
+        "filename": "C:\\Users\\Aluno\\Desktop\\projeto\\paises.json",
         "filenameType": "str",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 780,
+        "x": 790,
         "y": 360,
         "wires": [
             [
-                "21217c6601e751b4"
+                "274347365bf276b2"
             ]
         ]
     },
     {
-        "id": "21217c6601e751b4",
+        "id": "274347365bf276b2",
         "type": "json",
-        "z": "7a48eb7c067770d6",
+        "z": "6882061cf9b2929f",
         "name": "",
         "property": "payload",
         "action": "",
@@ -333,14 +346,14 @@
         "y": 420,
         "wires": [
             [
-                "ede4493cd13e0ef2"
+                "51c9989f12f55c13"
             ]
         ]
     },
     {
-        "id": "ede4493cd13e0ef2",
+        "id": "51c9989f12f55c13",
         "type": "http response",
-        "z": "7a48eb7c067770d6",
+        "z": "6882061cf9b2929f",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -349,9 +362,9 @@
         "wires": []
     },
     {
-        "id": "1a2b3c4d5e6f7g8h",
+        "id": "f07ea382f11f9b7d",
         "type": "http in",
-        "z": "f642ecb3a07b094e",
+        "z": "62fbdd8b78c30580",
         "name": "Recebe AFK",
         "url": "/AFK",
         "method": "post",
@@ -361,14 +374,14 @@
         "y": 220,
         "wires": [
             [
-                "json1"
+                "0f5e32f00962c247"
             ]
         ]
     },
     {
-        "id": "json1",
+        "id": "0f5e32f00962c247",
         "type": "json",
-        "z": "f642ecb3a07b094e",
+        "z": "62fbdd8b78c30580",
         "name": "Parse JSON",
         "property": "payload",
         "action": "",
@@ -377,15 +390,15 @@
         "y": 280,
         "wires": [
             [
-                "pegarID",
-                "62bf0f52eb014e65"
+                "5a33200057dbdc42",
+                "fbf358ced3d2e2d5"
             ]
         ]
     },
     {
-        "id": "pegarID",
+        "id": "5a33200057dbdc42",
         "type": "function",
-        "z": "f642ecb3a07b094e",
+        "z": "62fbdd8b78c30580",
         "name": "Pega jogadorId",
         "func": "msg.jogadorId = msg.payload.jogadorId;\nreturn msg;\n",
         "outputs": 1,
@@ -398,15 +411,15 @@
         "y": 340,
         "wires": [
             [
-                "lerArquivo",
-                "62bf0f52eb014e65"
+                "3325c1e72cfac5b1",
+                "fbf358ced3d2e2d5"
             ]
         ]
     },
     {
-        "id": "lerArquivo",
+        "id": "3325c1e72cfac5b1",
         "type": "file in",
-        "z": "f642ecb3a07b094e",
+        "z": "62fbdd8b78c30580",
         "name": "",
         "filename": "banco.json",
         "filenameType": "str",
@@ -417,15 +430,15 @@
         "y": 400,
         "wires": [
             [
-                "json2",
-                "62bf0f52eb014e65"
+                "a4bea6c0f0d3f0f1",
+                "fbf358ced3d2e2d5"
             ]
         ]
     },
     {
-        "id": "json2",
+        "id": "a4bea6c0f0d3f0f1",
         "type": "json",
-        "z": "f642ecb3a07b094e",
+        "z": "62fbdd8b78c30580",
         "name": "Parse para array",
         "property": "payload",
         "action": "",
@@ -434,14 +447,14 @@
         "y": 460,
         "wires": [
             [
-                "removerJogador"
+                "a7ada3b5fb77ce86"
             ]
         ]
     },
     {
-        "id": "removerJogador",
+        "id": "a7ada3b5fb77ce86",
         "type": "function",
-        "z": "f642ecb3a07b094e",
+        "z": "62fbdd8b78c30580",
         "name": "Remove jogador",
         "func": "let jogadores = msg.payload;\nlet jogadorId = msg.jogadorId; // ← vem do node Function anterior\n\n// Filtra a lista, removendo o jogador com o nome igual ao jogadorId\njogadores = jogadores.filter(j => j.nome !== jogadorId);\n\n// Retorna a lista atualizada para salvar no banco.json\nmsg.payload = JSON.stringify(jogadores, null, 2);\nreturn msg;",
         "outputs": 1,
@@ -454,15 +467,15 @@
         "y": 520,
         "wires": [
             [
-                "salvarArquivo",
-                "62bf0f52eb014e65"
+                "a2678fd1d996b104",
+                "fbf358ced3d2e2d5"
             ]
         ]
     },
     {
-        "id": "salvarArquivo",
+        "id": "a2678fd1d996b104",
         "type": "file",
-        "z": "f642ecb3a07b094e",
+        "z": "62fbdd8b78c30580",
         "name": "",
         "filename": "banco.json",
         "filenameType": "str",
@@ -474,15 +487,15 @@
         "y": 580,
         "wires": [
             [
-                "resposta",
-                "62bf0f52eb014e65"
+                "400b22fb55f58126",
+                "fbf358ced3d2e2d5"
             ]
         ]
     },
     {
-        "id": "resposta",
+        "id": "400b22fb55f58126",
         "type": "http response",
-        "z": "f642ecb3a07b094e",
+        "z": "62fbdd8b78c30580",
         "name": "Resposta OK",
         "statusCode": "",
         "headers": {},
@@ -491,9 +504,9 @@
         "wires": []
     },
     {
-        "id": "62bf0f52eb014e65",
+        "id": "fbf358ced3d2e2d5",
         "type": "debug",
-        "z": "f642ecb3a07b094e",
+        "z": "62fbdd8b78c30580",
         "name": "debug 3",
         "active": true,
         "tosidebar": true,
@@ -507,117 +520,111 @@
         "wires": []
     },
     {
-        "id": "293d5fa4038e3672",
+        "id": "http-in-sinal",
         "type": "http in",
-        "z": "274466637d8ee6a7",
+        "z": "c42e73b9cc74503b",
         "name": "",
         "url": "/sinal",
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 140,
-        "y": 80,
+        "x": 340,
+        "y": 200,
         "wires": [
             [
-                "a53506b11642cec8"
+                "1ed27176aea73985"
             ]
         ]
     },
     {
-        "id": "b044dfae799577fc",
+        "id": "http-in-reposta",
         "type": "http in",
-        "z": "274466637d8ee6a7",
+        "z": "c42e73b9cc74503b",
         "name": "",
         "url": "/reposta",
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 470,
-        "y": 80,
+        "x": 350,
+        "y": 280,
         "wires": [
             [
-                "41c270a6f7ca8186"
+                "function-get-sinal"
             ]
         ]
     },
     {
-        "id": "ad8e96f0dcd97a0a",
-        "type": "http response",
-        "z": "274466637d8ee6a7",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 130,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "a53506b11642cec8",
+        "id": "function-get-sinal",
         "type": "function",
-        "z": "274466637d8ee6a7",
-        "name": "function 3",
-        "func": "flow.set(\"sinal\", msg.req.query.sinal === \"true\");\nmsg.payload = { status: \"ok\" };\nreturn msg;\n",
+        "z": "c42e73b9cc74503b",
+        "name": "",
+        "func": "const sinal = flow.get('sinal') || false;\nmsg.payload = { sinal };\nreturn msg;",
         "outputs": 1,
-        "timeout": 0,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 140,
-        "y": 160,
+        "x": 540,
+        "y": 280,
         "wires": [
             [
-                "89329ef3d51b4bd8",
-                "ad8e96f0dcd97a0a"
+                "http-response-reposta"
             ]
         ]
     },
     {
-        "id": "89329ef3d51b4bd8",
-        "type": "debug",
-        "z": "274466637d8ee6a7",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 740,
-        "y": 180,
+        "id": "http-response-reposta",
+        "type": "http response",
+        "z": "c42e73b9cc74503b",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 280,
         "wires": []
     },
     {
-        "id": "41c270a6f7ca8186",
+        "id": "1ed27176aea73985",
         "type": "function",
-        "z": "274466637d8ee6a7",
+        "z": "c42e73b9cc74503b",
         "name": "function 2",
-        "func": "const sinal = flow.get(\"sinal\") || false;\nmsg.payload = { sinal };\nreturn msg;\n",
+        "func": "const novoSinal = msg.req.query.sinal === 'true';\nflow.set('sinal', novoSinal);\n\n// Define o payload da mensagem\nmsg.payload = { sinal: novoSinal };\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 460,
-        "y": 160,
+        "x": 560,
+        "y": 200,
         "wires": [
             [
-                "89329ef3d51b4bd8",
-                "5458e26c8872b72c"
+                "websocket-out",
+                "1ece28d1050d11cf"
             ]
         ]
     },
     {
-        "id": "5458e26c8872b72c",
+        "id": "websocket-out",
+        "type": "websocket out",
+        "z": "c42e73b9cc74503b",
+        "name": "",
+        "server": "",
+        "client": "ws-reposta-client",
+        "x": 770,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "1ece28d1050d11cf",
         "type": "http response",
-        "z": "274466637d8ee6a7",
+        "z": "c42e73b9cc74503b",
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 450,
-        "y": 220,
+        "x": 790,
+        "y": 160,
         "wires": []
     }
 ]
