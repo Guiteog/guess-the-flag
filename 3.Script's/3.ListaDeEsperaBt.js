@@ -5,7 +5,7 @@ let players;
 let sinal = false;
 
 //Link wss
-const wsRespostaURL ="wss://f04a-200-211-208-194.ngrok-free.app/ws/reposta";//Sinal para a troca de pagina
+const wsRespostaURL ="wss://f04a-200-211-208-194.ngrok-free.app/ws/resposta";//Sinal para a troca de pagina
 const wsJogadoresURL ="wss://f04a-200-211-208-194.ngrok-free.app/ws/retornadados";//Sinal para coletar
 
 // Criando conexões WebSocket
