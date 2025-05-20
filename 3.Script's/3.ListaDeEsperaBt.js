@@ -59,5 +59,4 @@ setInterval(() => {
   }
 }, 250);
 
-setInterval(dados, 2500);
 setInterval(s, 10000);
