@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    background: linear-gradient(to bottom, #001f3f, #00122e);
+    background: linear-gradient(10deg, #001f3f, #00122e);
     min-height: 100vh;
 
 }
@@ -25,24 +25,28 @@
 }
 
 .cabecario img{
-    width: clamp(20px, 25vw, 200px);
+    width: clamp(60px, 45vw, 200px);
 }
 
 
 
 #img_logo img{
-    width: clamp(40px, 45vw, 350px);
+    width: clamp(100px, 65vw, 380px);
 }
 #img_logo{
-    margin-top: clamp(25px, 25vh, 150px);
-    margin-bottom: clamp(25px, 25vh, 150px);
-    left: clamp(5px, 25vw, 40px);
+    position: relative;
+    margin-top: clamp(25px, 15vh, 110px);
+    margin-bottom: clamp(25px, 15vh, 110px);
+    left: clamp(7px, 1.8vh, 18px);
+    
 }
 
 .forms{
     display: flex;
+    position: relative;
     flex-direction: column;
-    left: clamp(5px, 25vw, 40px);
+    align-items: center;
+    left: clamp(7px, 1.8vh, 18px);
 }
 
 
@@ -67,12 +71,13 @@ input[type="text"] {
 .botao-enviar {
     background-color: #008cff;
     color: white;
-    font-size: 16px;
+    font-size: clamp(6px, 1rem, 32px);
     font-weight: 600;
     padding: 12px 32px;
     border: none;
     border-radius: 10px;
-    margin-top: 15px;
+    margin-top: clamp(5px, 25vh, 10px);
+    width: clamp(25px, 25vw, 250px);
     cursor: pointer;
     transition: 0.3s ease;
 }
