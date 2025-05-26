@@ -4,7 +4,7 @@ let nomeADM = "nomeADM123"
 async function dados(){
     localStorage.setItem("Jogador", JSON.stringify({nome:nome.value}));
     try {
-        const resposta = await fetch(`https://f04a-200-211-208-194.ngrok-free.app/dados?nome=${nome.value}`, {
+        const resposta = await fetch(`https://6c27-200-211-208-194.ngrok-free.app/dados?nome=${nome.value}`, {
             method: 'GET',
             headers: {
                 'ngrok-skip-browser-warning': 'true' 
