@@ -9,7 +9,7 @@
 }
 .container{
     display: flex;
-    justify-content: center;
+    align-items: center;
     flex-direction: column;
     background: linear-gradient(to bottom, #001f3f, #00122e);
     min-height: 100vh;
@@ -33,10 +33,16 @@
 #img_logo img{
     width: clamp(40px, 45vw, 350px);
 }
+#img_logo{
+    margin-top: clamp(25px, 25vh, 150px);
+    margin-bottom: clamp(25px, 25vh, 150px);
+    left: clamp(5px, 25vw, 40px);
+}
 
 .forms{
     display: flex;
     flex-direction: column;
+    left: clamp(5px, 25vw, 40px);
 }
 
 
