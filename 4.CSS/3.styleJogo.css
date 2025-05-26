@@ -23,7 +23,6 @@ body{
     display: flex;
     justify-content:space-between;
     list-style: none;
-
 }
 
 .menu #pts, #cronometro{
@@ -41,16 +40,10 @@ body{
     display: grid;
     padding-top: clamp(10px, 17vh, 220px);
     background: #011f50;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas: 
-    'cima'
-    'baixo'
-    ;
 }
 
 .img_bandeira{
     display: flex;
-    grid-area: 'cima';
     align-items: center;
     justify-content: center;
     margin-bottom: clamp(25px, 2vh, 34px);
@@ -61,7 +54,6 @@ body{
 #bandeira{
     width: clamp(300px, 27vw, 400px);
     height: clamp(170px, 29.235vh, 350px);
-    display: grid;
     max-width: 400px;
     max-height: 350px;
     border: 3px solid  #0D0D0D;
@@ -76,6 +68,8 @@ body{
 
 #img_logo{
     margin-bottom: clamp(5px, 4vh, 15px);
+    text-align: center;
+    left: 50%;
 }
 
 .button{
@@ -85,7 +79,6 @@ body{
 .opcoes {
     
     display: flex;
-    grid-area: 'baixo';
     flex-wrap: wrap;
     justify-self: center; 
     align-self: center;
