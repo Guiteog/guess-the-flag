@@ -4,44 +4,54 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: 'Poppins', Arial, sans-serif;
+    
 }
-
-body {
+.container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     background: linear-gradient(to bottom, #001f3f, #00122e);
-    color: white;
-    text-align: center;
-    font-family: 'Poppins', Arial, sans-serif;
+    min-height: 100vh;
+
 }
 
-.container {
+
+.cabecario {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: clamp(35px, 25vh, 90px);
+}
+
+.cabecario img{
+    width: clamp(20px, 25vw, 200px);
+}
+
+
+
+#img_logo img{
+    width: clamp(40px, 45vw, 350px);
+}
+#img_logo{
+    margin-top: clamp(25px, 25vh, 150px);
+    margin-bottom: clamp(25px, 25vh, 150px);
+    left: clamp(5px, 25vw, 40px);
+}
+
+.forms{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-}
-
-.titulo {
-    font-size: 48px;
-    font-weight: 800;
-    margin-top: 20px;
-}
-
-.subtitulo {
-    font-size: 18px;
-    color: #ccc;
-    margin-bottom: 20px;
-}
-
-#img_logoc img {
-    height: auto;
-    margin: 20px 0;
-    text-align: center;
+    left: clamp(5px, 25vw, 40px);
 }
 
 
+
+
+
+
+
+/*--------------------Input e button------------------- */
 input[type="text"] {
     width: 300px;
     padding: 12px;
@@ -52,6 +62,7 @@ input[type="text"] {
     box-shadow: 0 0 5px rgba(0, 140, 255, 0.3);
     text-align: center;
 }
+
 
 .botao-enviar {
     background-color: #008cff;
