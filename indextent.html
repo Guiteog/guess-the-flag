@@ -9,17 +9,26 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="titulo">GTF</h1>
-        <p class="subtitulo">GUESS THE FLAG</p>
+
+            <!-- Logo 'parte superior do site' -->
+        <header class="cabecario">
+            <nav>
+                <img src="img/logo_branca.svg" alt="Logo Guess The Flag">
+            </nav> 
+        </header>
+
 
         <!-- Globo iluminado -->
         <div id="img_logo">
-            <img src="/img/globo.svg" alt="Globo" width="65%" >
+            <img src="/img/globo.svg" alt="Globo">
         </div>
 
         <!-- Input e botão -->
-        <input type="text" id="seu_nome" name="seu_nome" placeholder="Digite seu nome...">
-        <button onclick="dados()" class="botao-enviar">JOGAR AGORA</button>
+        <div class="forms">
+            <input type="text" id="seu_nome" name="seu_nome" placeholder="Digite seu nome..."> <!--Input-->
+            <button onclick="dados()" class="botao-enviar">JOGAR AGORA</button> <!--Button-->
+        </div>
+
     </div>
 
     <script src="./3.Script's/1.Login.js"></script>
