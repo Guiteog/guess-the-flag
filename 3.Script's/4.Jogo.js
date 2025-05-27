@@ -25,7 +25,7 @@ let minutos = 0;
 
 
 //pegar todos os dados da API e Amazerna dentro de uma variavel
-fetch('https://6c27-200-211-208-194.ngrok-free.app/paises', {
+fetch('https://9a06-200-211-208-194.ngrok-free.app/paises', {
     method: 'GET',
     headers: {
         'ngrok-skip-browser-warning': 'true' 
@@ -144,7 +144,7 @@ async function dados(){
     let dadosJSON = encodeURIComponent(JSON.stringify(dadosArray));
 
     try{
-        const requisicao = fetch(`https://6c27-200-211-208-194.ngrok-free.app/dadosjogador?dados=${dadosJSON}`,{
+        const requisicao = fetch(`https://9a06-200-211-208-194.ngrok-free.app/dadosjogador?dados=${dadosJSON}`,{
             method : 'GET',
             headers : {
                 'ngrok-skip-browser-warning': 'true' 
