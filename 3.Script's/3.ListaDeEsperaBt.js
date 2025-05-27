@@ -14,18 +14,18 @@ const wsJogadores = new WebSocket(wsJogadoresURL);
 
 //pegar dados dos players
 wsJogadores.onmessage = (event) => {
-  players = JSON.parse(event.data);
-  updatePlayerList(players)
-
-  console.log("Recebido de wsJogadores:", event.data);
   try {
-    players = JSON.parse(event.data);
-    console.log("JSON parseado:", players);
-    updatePlayerList(players);
+    const data = JSON.parse(event.data);
+
+    if (Array.isArray(data) && data.length > 0) {
+      updatePlayerList(data);
+    } else {
+      updatePlayerList([]);
+    }
   } catch (e) {
-    console.error("Erro ao parsear JSON:", e);
+    console.error("Erro ao parsear JSON wsJogadores:", e);
   }
-}
+};
 
 //Espera do sinal
 wsResposta.onmessage = (event) => {
