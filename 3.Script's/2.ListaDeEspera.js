@@ -25,7 +25,7 @@ wsResposta.onmessage = (event) => {
 }
 
 
-// Adiciona 
+// Adiciona
 function updatePlayerList(players) {
   list.innerHTML = ""; // Limpa
 
