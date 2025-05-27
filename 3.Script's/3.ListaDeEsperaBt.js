@@ -3,6 +3,7 @@ const list = document.getElementById('playersList');
 const startBtn = document.getElementById('startBtn');
 let players;
 let sinal = false;
+console.log('script carregado');
 
 //Link wss
 const wsRespostaURL ="wss://9125-200-206-76-106.ngrok-free.app/ws/resposta";//Sinal para a troca de pagina
