@@ -15,17 +15,8 @@ const wsJogadores = new WebSocket(wsJogadoresURL);
 
 //pegar dados dos players
 wsJogadores.onmessage = (event) => {
-  try {
-    const data = JSON.parse(event.data);
-
-    if (Array.isArray(data) && data.length > 0) {
-      updatePlayerList(data);
-    } else {
-      updatePlayerList([]);
-    }
-  } catch (e) {
-    console.error("Erro ao parsear JSON wsJogadores:", e);
-  }
+  players = JSON.parse(event.data);
+  updatePlayerList(players)
 };
 
 //Espera do sinal
@@ -56,6 +47,14 @@ function updatePlayerList(players) {
   }
 }
 
+function ordem(){
+  fetch(`https://9125-200-206-76-106.ngrok-free.app/sinal?sinal=true`, {
+    method: 'GET',
+    headers: {
+        'ngrok-skip-browser-warning': 'true' 
+    }
+  })
+}
 
 
 setInterval(() => {
