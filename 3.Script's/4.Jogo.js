@@ -92,7 +92,7 @@ function button(){
     botoes.forEach((button) =>{
 
         if ( button.textContent=== pais){
-            button.style.background = "#2ECC71"
+            button.style.background = "linear-gradient(135deg, #28a745, #218838)";
             
             setTimeout(() => {
                 button.style.background = ""
