@@ -142,7 +142,7 @@ async function dados(){
 
     let nome = jogador.nome;
     let dadosArray = [nome, pontuacao, tempo];
-    let dadosJSON = encodeURIComponent(JSON.stringify(dadosArray));
+    let dadosString = dadosArray.join(',');
 
     try{
         const requisicao = await fetch(`https://1013-200-211-208-194.ngrok-free.app/dadosjogador?dados=${dadosArray}`,{
