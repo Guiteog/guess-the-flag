@@ -11,7 +11,7 @@ body {
 
 header {
   width: 100%;
-  background: linear-gradient(270deg, #003973, #2e63a3, #011f50, #2e63a3, #003973);
+  background: linear-gradient(270deg, #05407a, #2e63a3, #2f5592, #2e63a3, #003973);
   text-align: center;
   height: clamp(55px, 7.2vh, 100px);
   background-size: 500% 500%;

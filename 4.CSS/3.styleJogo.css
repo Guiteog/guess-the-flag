@@ -14,8 +14,8 @@ body{
 .menu{
     display: grid;
     align-items: center;
-    height: clamp(25px, 8.5vh, 100px);
-    background: linear-gradient(160deg, #001f3f, #23384d,#032966);
+    height: clamp(55px, 7.2vh, 100px);
+    background: linear-gradient(160deg, #072f57, #053566,#033a92);
     
 }
 
@@ -65,8 +65,10 @@ body{
 
 /* Imagem logo */
 #img_logo img{
-    width: clamp(70px, 9.2vw, 195px);
-    height: clamp(20px, 6.8vw, 195px);
+    display: flex;
+    justify-self: center;
+    width: clamp(5px, 7.6vw, 195px);
+    height: clamp(5px, 5.5vw, 195px);
    
 }
 
