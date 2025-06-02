@@ -44,7 +44,8 @@ body{
     align-items: center;
 }
 .menu #pts, #cronometro{
-    font-size: clamp(3px, 2.45vh, 18px);
+    font-size: clamp(11px, 3.45vw, 18px);
+    font-size: clamp(11px, 2.45vh, 18px);
     padding: 0 2vw;
     font-weight: 450;
 }
@@ -81,8 +82,8 @@ body{
 #img_logo img{
     display: flex;
     justify-self: center;
-    width: clamp(5px, 7.2vw, 195px);
-    height: clamp(5px, 5.5vw, 195px);
+    width: clamp(60px, 19.6vw, 255px);
+    height: clamp(60px, 11vh, 255px);
    
 }
 

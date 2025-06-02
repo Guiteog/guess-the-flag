@@ -15,6 +15,10 @@ wsJogadores.onmessage = (event) => {
   updatePlayerList(dadosPlayer)
 }
 
+wsJogadores.onopen = () => {
+  wsJogadores.send("getRank");
+}
+
 
 // Adiciona 
 function updatePlayerList(dadosPlayer) {
