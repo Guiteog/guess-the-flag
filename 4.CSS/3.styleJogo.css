@@ -11,11 +11,25 @@ body{
     background: #011f50;
     
 }
+@keyframes animarGradiente {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+  }
+  
 .menu{
     display: grid;
     align-items: center;
     height: clamp(55px, 7.2vh, 100px);
-    background: linear-gradient(160deg, #072f57, #053566,#033a92);
+    background: linear-gradient(270deg, #05407a, #2e63a3, #2f5592, #2e63a3, #003973);
+    background-size: 500% 500%;
+    animation: animarGradiente 10s ease infinite;
     
 }
 
@@ -67,7 +81,7 @@ body{
 #img_logo img{
     display: flex;
     justify-self: center;
-    width: clamp(5px, 7.6vw, 195px);
+    width: clamp(5px, 7.2vw, 195px);
     height: clamp(5px, 5.5vw, 195px);
    
 }
