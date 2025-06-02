@@ -47,18 +47,24 @@
         "headers": []
     },
     {
+        "id": "70d5afa84c288ade",
+        "type": "websocket-listener",
+        "path": "/ws/rank",
+        "wholemsg": "false"
+    },
+    {
         "id": "8c42cb475d23d41a",
         "type": "function",
         "z": "80341690ae105087",
         "name": "function 1",
-        "func": "let dados;\n\n// Tenta processar os dados do arquivo\ntry {\n    let jsonString = msg.payload.trim(); \n    let jsonObjeto = JSON.parse(jsonString); // Converte de volta para objeto\n\n    if (!Array.isArray(jsonObjeto)) {\n        jsonObjeto = [jsonObjeto]; // Se não for array, transforma em array\n    }\n\n    // Junta todos os dados em um único array\n    dados = jsonObjeto.reduce((listaJSON, item) => {\n        if (item.nome) {\n            listaJSON.push({ nome: item.nome });\n        }\n        return listaJSON;\n    }, []);\n    \n} catch (e) {\n    dados = []; // Caso de erro, cria um array vazio\n    msg.payload = 'error'\n    return dados;\n}\n\n// Adiciona o nome enviado pela URL\nlet nome = msg.req.query.nome;\nif (nome) {\n    dados.push({ nome: nome }); // Adiciona o novo nome\n}\ndados = dados.filter(nome => nome.nome !== \"nomeADM123\")\n\n// Atualiza msg.payload com o JSON atualizado\nmsg.payload = JSON.stringify(dados, null, 2); // Formatação legível\n\nreturn msg;\n",
+        "func": "let dados = [];\n\ntry {\n    // Remove espaços e converte a string JSON em objeto\n    let jsonString = msg.payload.trim();\n    let jsonObjeto = JSON.parse(jsonString);\n\n    // Garante que é um array\n    if (!Array.isArray(jsonObjeto)) {\n        jsonObjeto = [jsonObjeto];\n    }\n\n    // Filtra apenas os objetos que têm propriedade 'nome'\n    dados = jsonObjeto.filter(item => item.nome);\n} catch (e) {\n    // Caso dê erro na leitura do JSON, inicia array vazio\n    dados = [];\n}\n\n// Pega o nome enviado na query da URL \nlet nome = msg.req.query.nome;\nif (nome) {\n    dados.push({ nome: nome });\n}\n\n// Remove o nome \"nomeADM123\" da lista\ndados = dados.filter(item => item.nome !== \"nomeADM123\");\n\n// Atualiza o payload com o array de objetos (não string JSON)\nmsg.payload = dados;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 700,
+        "x": 800,
         "y": 240,
         "wires": [
             [
@@ -106,7 +112,7 @@
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 690,
+        "x": 710,
         "y": 100,
         "wires": [
             [
@@ -142,11 +148,11 @@
         "createDir": false,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 850,
+        "x": 990,
         "y": 240,
         "wires": [
             [
-                "edde468f2e087054"
+                "305bff1e65f48743"
             ]
         ]
     },
@@ -178,28 +184,11 @@
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 550,
+        "x": 650,
         "y": 240,
         "wires": [
             [
                 "8c42cb475d23d41a"
-            ]
-        ]
-    },
-    {
-        "id": "edde468f2e087054",
-        "type": "json",
-        "z": "80341690ae105087",
-        "name": "",
-        "property": "payload",
-        "action": "obj",
-        "pretty": false,
-        "x": 1010,
-        "y": 240,
-        "wires": [
-            [
-                "305bff1e65f48743",
-                "3cdd103c4498bbd6"
             ]
         ]
     },
@@ -216,20 +205,10 @@
         "y": 320,
         "wires": [
             [
-                "09299e44586a6f2b"
+                "09299e44586a6f2b",
+                "c4fba02a88e8a282"
             ]
         ]
-    },
-    {
-        "id": "0d84825f35524a01",
-        "type": "http response",
-        "z": "80341690ae105087",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1390,
-        "y": 320,
-        "wires": []
     },
     {
         "id": "09299e44586a6f2b",
@@ -255,8 +234,8 @@
         "id": "e5c13519a51a00e0",
         "type": "function",
         "z": "80341690ae105087",
-        "name": "ranking",
-        "func": "let dados = [];\n\ntry {\n    dados = JSON.parse(msg.payload);\n    if (!Array.isArray(dados)) dados = [dados];\n} catch (e) {\n    dados = [];\n}\n\ntry {\n    let [nome, pontos, tempo] = JSON.parse(msg.req.query.dados);\n\n    if (nome) {\n        let jogador = dados.find(j => j.nome === nome);\n\n        if (jogador) {\n            jogador.pontos = pontos;\n            jogador.tempo = tempo;\n        } else {\n            dados.push({ nome, pontos, tempo });\n        }\n    }\n} catch (e) {\n    // Dados inválidos, ignora\n}\n\nmsg.payload = JSON.stringify(dados, null, 2);\nreturn msg;\n",
+        "name": "",
+        "func": "let dados = [];\ntry {\n    dados = JSON.parse(msg.payload);\n    if (!Array.isArray(dados)) dados = [dados];\n} catch (e) {\n    dados = [];\n}\n\n// TRATAMENTO DA STRING VINDO DO CLIENTE\ntry {\n    let [nome, pontos, tempo] = msg.req.query.dados.split(',');\n\n    pontos = Number(pontos);\n    tempo = Number(tempo);\n\n    if (nome) {\n        let jogador = dados.find(j => j.nome === nome);\n        if (jogador) {\n            jogador.pontos = pontos;\n            jogador.tempo = tempo;\n        } else {\n            dados.push({ nome, pontos, tempo });\n        }\n    }\n} catch (e) {\n    node.warn(\"Erro ao processar os dados: \" + e.message);\n}\n\nmsg.payload = JSON.stringify(dados, null, 2);\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -278,8 +257,8 @@
         "name": "",
         "files": "banco.json",
         "recursive": "",
-        "x": 380,
-        "y": 100,
+        "x": 540,
+        "y": 60,
         "wires": [
             [
                 "d23aa90a076edba9"
@@ -308,13 +287,195 @@
         "createDir": false,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 1040,
+        "x": 1000,
         "y": 320,
         "wires": [
             [
-                "0d84825f35524a01"
+                "6d4965066d0915c9",
+                "20d6bfa08e5791f4"
             ]
         ]
+    },
+    {
+        "id": "2f64489d761747cd",
+        "type": "websocket out",
+        "z": "80341690ae105087",
+        "name": "",
+        "server": "70d5afa84c288ade",
+        "client": "",
+        "x": 870,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "6d4965066d0915c9",
+        "type": "http response",
+        "z": "80341690ae105087",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1270,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "3ccd44328cfa7457",
+        "type": "file in",
+        "z": "80341690ae105087",
+        "name": "",
+        "filename": "rank.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 520,
+        "y": 660,
+        "wires": [
+            [
+                "b5982219ff9a395e",
+                "3fbea20e26d18f0b"
+            ]
+        ]
+    },
+    {
+        "id": "b5982219ff9a395e",
+        "type": "json",
+        "z": "80341690ae105087",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 690,
+        "y": 660,
+        "wires": [
+            [
+                "2f64489d761747cd",
+                "981bf844aea0d645"
+            ]
+        ]
+    },
+    {
+        "id": "3d3f6153ae20e1ea",
+        "type": "websocket in",
+        "z": "80341690ae105087",
+        "name": "",
+        "server": "70d5afa84c288ade",
+        "client": "",
+        "x": 310,
+        "y": 660,
+        "wires": [
+            [
+                "3ccd44328cfa7457"
+            ]
+        ]
+    },
+    {
+        "id": "f7787c3d90b0e7dd",
+        "type": "watch",
+        "z": "80341690ae105087",
+        "name": "",
+        "files": "rank.json",
+        "recursive": "",
+        "x": 300,
+        "y": 740,
+        "wires": [
+            [
+                "3ccd44328cfa7457"
+            ]
+        ]
+    },
+    {
+        "id": "06158b1b3e30c4eb",
+        "type": "http in",
+        "z": "80341690ae105087",
+        "name": "",
+        "url": "/rank",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 300,
+        "y": 600,
+        "wires": [
+            [
+                "3ccd44328cfa7457"
+            ]
+        ]
+    },
+    {
+        "id": "981bf844aea0d645",
+        "type": "http response",
+        "z": "80341690ae105087",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 850,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "11f260904f1c2b42",
+        "type": "websocket in",
+        "z": "80341690ae105087",
+        "name": "",
+        "server": "ad6a0e1d76087265",
+        "client": "",
+        "x": 500,
+        "y": 140,
+        "wires": [
+            [
+                "d23aa90a076edba9"
+            ]
+        ]
+    },
+    {
+        "id": "3fbea20e26d18f0b",
+        "type": "debug",
+        "z": "80341690ae105087",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "c4fba02a88e8a282",
+        "type": "debug",
+        "z": "80341690ae105087",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "20d6bfa08e5791f4",
+        "type": "debug",
+        "z": "80341690ae105087",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 440,
+        "wires": []
     },
     {
         "id": "75a9638f6e263217",
@@ -547,11 +708,12 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 340,
-        "y": 200,
+        "x": 320,
+        "y": 340,
         "wires": [
             [
-                "753f02bea4092b1d"
+                "753f02bea4092b1d",
+                "3c71b4e0f05d44f7"
             ]
         ]
     },
@@ -564,11 +726,12 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 350,
-        "y": 280,
+        "x": 330,
+        "y": 420,
         "wires": [
             [
-                "5dbe9458f00c3cdb"
+                "5dbe9458f00c3cdb",
+                "3c71b4e0f05d44f7"
             ]
         ]
     },
@@ -584,11 +747,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 540,
-        "y": 280,
+        "x": 320,
+        "y": 500,
         "wires": [
             [
-                "7a26abec4dcd6157"
+                "7a26abec4dcd6157",
+                "3c71b4e0f05d44f7"
             ]
         ]
     },
@@ -599,8 +763,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 710,
-        "y": 280,
+        "x": 510,
+        "y": 600,
         "wires": []
     },
     {
@@ -615,12 +779,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 560,
-        "y": 200,
+        "x": 640,
+        "y": 340,
         "wires": [
             [
                 "818f128bae01547c",
-                "47588b5945ae317b"
+                "3c71b4e0f05d44f7"
             ]
         ]
     },
@@ -631,19 +795,24 @@
         "name": "",
         "server": "",
         "client": "fa0f974b1218259c",
-        "x": 770,
-        "y": 200,
+        "x": 990,
+        "y": 340,
         "wires": []
     },
     {
-        "id": "47588b5945ae317b",
-        "type": "http response",
+        "id": "3c71b4e0f05d44f7",
+        "type": "debug",
         "z": "1a9733d742b99cab",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 790,
-        "y": 160,
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 500,
         "wires": []
     }
 ]
