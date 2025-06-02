@@ -2,7 +2,7 @@ let players;
 let rank = document.getElementById ("rank")
 
 //Link wss
-const wsJogadoresURL ="wss://aaed-200-211-208-194.ngrok-free.app/ws/retornadados";//Sinal para coletar
+const wsJogadoresURL ="wss://1013-200-211-208-194.ngrok-free.app/ws/retornadados";//Sinal para coletar
 
 // Criando conexões WebSocket
 const wsJogadores = new WebSocket(wsJogadoresURL);
