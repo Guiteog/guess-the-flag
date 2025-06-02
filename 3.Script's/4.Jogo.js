@@ -145,7 +145,7 @@ async function dados(){
     let dadosJSON = encodeURIComponent(JSON.stringify(dadosArray));
 
     try{
-        const requisicao = fetch(`https://1013-200-211-208-194.ngrok-free.app/dadosjogador?dados=${dadosArray}`,{
+        const requisicao = await fetch(`https://1013-200-211-208-194.ngrok-free.app/dadosjogador?dados=${dadosArray}`,{
             method : 'GET',
             headers : {
                 'ngrok-skip-browser-warning': 'true' 
