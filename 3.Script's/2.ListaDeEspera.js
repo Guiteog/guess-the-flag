@@ -18,6 +18,12 @@ wsJogadores.onmessage = (event) => {
   updatePlayerList(players)
 }
 
+//sinal para pegar os dados
+wsJogadores.onopen = () => {
+  wsJogadores.send("getRank");
+}
+
+
 //Espera do sinal
 wsResposta.onmessage = (event) => {
   sinalJSON = JSON.parse(event.data)
