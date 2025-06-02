@@ -1,8 +1,9 @@
-let players;
-let rank = document.getElementById ("rank")
+let dadosPlayer;
+let rank = document.getElementById("rank");
+
 
 //Link wss
-const wsJogadoresURL ="wss://1013-200-211-208-194.ngrok-free.app/ws/retornadados";//Sinal para coletar
+const wsJogadoresURL ="wss://1013-200-211-208-194.ngrok-free.app/ws/rank";//Sinal para coletar
 
 // Criando conexões WebSocket
 const wsJogadores = new WebSocket(wsJogadoresURL);
@@ -10,21 +11,44 @@ const wsJogadores = new WebSocket(wsJogadoresURL);
 //pegar dados dos players
 
 wsJogadores.onmessage = (event) => {
-  players = JSON.parse(event.data);
-  updatePlayerList(players)
+  dadosPlayer = JSON.parse(event.data);
+  updatePlayerList(dadosPlayer)
 }
 
 
 // Adiciona 
-function updatePlayerList(players) {
-  list.innerHTML = ""; // Limpa
+function updatePlayerList(dadosPlayer) {
+  rank.innerHTML = ""; // Limpa
 
-  console.log(players);
+  dadosPlayer.forEach((player, index) => {
 
-  players.forEach(player => {
+    //Criar elemento li
     const li = document.createElement("li");
-    li.textContent = player.nome; 
-    list.appendChild(li);
+    li.classList.add("nome-tabela");
+    
+    //criar uma caixa de span para separar os itens dentro do elemento li
+    
+    //nome
+    const nomeSpan = document.createElement("span");
+    nomeSpan.textContent = player.nome;
+
+    //tempo
+    const tempoSpan = document.createElement("span");
+    tempoSpan.textContent = player.tempo;
+
+    //pontos
+    const pontosSpan = document.createElement("span");
+    pontosSpan.textContent = player.pontos
+
+    //Adiconar itens
+    li.appendChild(nomeSpan);
+    li.appendChild(tempoSpan);
+    li.appendChild(pontosSpan);
+
+    //variação de cor
+    
+
+    rank.appendChild(li);
   });
 }
  
