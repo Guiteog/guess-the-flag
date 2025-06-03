@@ -135,29 +135,31 @@ function ponts(event) {
 }
 
 //-----------------Local Storage------------------//
-async function dados(){
-
+async function dados() {
     let dados = localStorage.getItem("Jogador");
     let jogador = dados ? JSON.parse(dados) : {};
 
     let nome = jogador.nome;
-    let dadosArray = [nome, pontuacao, tempo];
-    let dadosString = dadosArray.join(',');
+    let payload = {
+        nome: nome,
+        pontuacao: pontuacao,
+        tempo: tempo
+    };
 
-    try{
-        const requisicao = await fetch(`https://1013-200-211-208-194.ngrok-free.app/dadosjogador?dados=${dadosString}`,{
-            method : 'GET',
-            headers : {
-                'ngrok-skip-browser-warning': 'true' 
-            }
-        })
+    try {
+        const requisicao = await fetch("https://1013-200-211-208-194.ngrok-free.app/dadosjogador", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'ngrok-skip-browser-warning': 'true'
+            },
+            body: JSON.stringify(payload)
+        });
 
-        if(!requisicao.ok){
-                throw new Error("Erro na requisição");
-            }
-    }
-
-    catch(erro){
+        if (!requisicao.ok) {
+            throw new Error("Erro na requisição");
+        }
+    } catch (erro) {
         console.error("Erro ao enviar dados:", erro);
     }
 }
