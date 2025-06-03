@@ -42,7 +42,7 @@ function updatePlayerList(dadosPlayer) {
 
     //pontos
     const pontosSpan = document.createElement("span");
-    pontosSpan.textContent = player.pontos
+    pontosSpan.textContent = player.pontuacao
 
     //Adiconar itens
     li.appendChild(nomeSpan);
