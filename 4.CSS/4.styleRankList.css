@@ -61,6 +61,14 @@ header {
   scrollbar-width: thin;
   scrollbar-color: white transparent;
 }
+
+.results-box li {
+  display: flex;
+  justify-content: space-between;
+  padding: 17px;
+  margin: 10px 5px 10px 5px;
+  border-radius: 20px;
+}
   
 .container {
   display: flex;
