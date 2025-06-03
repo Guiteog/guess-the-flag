@@ -147,7 +147,7 @@ async function dados() {
     };
 
     try {
-        const requisicao = await fetch("https://1013-200-211-208-194.ngrok-free.app/dadosjogador", {
+        const requisicao = await fetch("https://4742-200-206-76-106.ngrok-free.app/dadosjogador", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
