@@ -25,7 +25,7 @@ let minutos = 0;
 
 
 //pegar todos os dados da API e Amazerna dentro de uma variavel
-fetch('https://1013-200-211-208-194.ngrok-free.app/paises', {
+fetch('https://4742-200-206-76-106.ngrok-free.app/paises', {
     method: 'GET',
     headers: {
         'ngrok-skip-browser-warning': 'true' 
