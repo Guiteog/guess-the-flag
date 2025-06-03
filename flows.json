@@ -198,15 +198,14 @@
         "z": "80341690ae105087",
         "name": "",
         "url": "/dadosjogador",
-        "method": "get",
+        "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 410,
-        "y": 320,
+        "x": 1210,
+        "y": 460,
         "wires": [
             [
-                "09299e44586a6f2b",
-                "c4fba02a88e8a282"
+                "e5c13519a51a00e0"
             ]
         ]
     },
@@ -222,11 +221,11 @@
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 600,
-        "y": 320,
+        "x": 1540,
+        "y": 460,
         "wires": [
             [
-                "e5c13519a51a00e0"
+                "f9e1a3521b535c64"
             ]
         ]
     },
@@ -235,18 +234,19 @@
         "type": "function",
         "z": "80341690ae105087",
         "name": "",
-        "func": "let dados = [];\ntry {\n    dados = JSON.parse(msg.payload);\n    if (!Array.isArray(dados)) dados = [dados];\n} catch (e) {\n    dados = [];\n}\n\n// TRATAMENTO DA STRING VINDO DO CLIENTE\ntry {\n    let [nome, pontos, tempo] = msg.req.query.dados.split(',');\n\n    pontos = Number(pontos);\n    tempo = Number(tempo);\n\n    if (nome) {\n        let jogador = dados.find(j => j.nome === nome);\n        if (jogador) {\n            jogador.pontos = pontos;\n            jogador.tempo = tempo;\n        } else {\n            dados.push({ nome, pontos, tempo });\n        }\n    }\n} catch (e) {\n    node.warn(\"Erro ao processar os dados: \" + e.message);\n}\n\nmsg.payload = JSON.stringify(dados, null, 2);\nreturn msg;\n",
+        "func": "let nome = msg.payload.nome;\nlet pontuacao = msg.payload.pontuacao;\nlet tempo = msg.payload.tempo;\n\nlet jogador = {\n    nome:nome,\n    pontuacao: pontuacao,\n    tempo: tempo,\n};\n\nmsg.jogador = jogador;\nreturn msg",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 780,
-        "y": 320,
+        "x": 1380,
+        "y": 460,
         "wires": [
             [
-                "94485bf7f8573e84"
+                "09299e44586a6f2b",
+                "4ee4d6478a3b722d"
             ]
         ]
     },
@@ -261,7 +261,7 @@
         "y": 60,
         "wires": [
             [
-                "d23aa90a076edba9"
+                "67214956d3114bb0"
             ]
         ]
     },
@@ -275,26 +275,6 @@
         "x": 1440,
         "y": 100,
         "wires": []
-    },
-    {
-        "id": "94485bf7f8573e84",
-        "type": "file",
-        "z": "80341690ae105087",
-        "name": "",
-        "filename": "rank.json",
-        "filenameType": "str",
-        "appendNewline": true,
-        "createDir": false,
-        "overwriteFile": "true",
-        "encoding": "none",
-        "x": 1000,
-        "y": 320,
-        "wires": [
-            [
-                "6d4965066d0915c9",
-                "20d6bfa08e5791f4"
-            ]
-        ]
     },
     {
         "id": "2f64489d761747cd",
@@ -314,8 +294,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 1270,
-        "y": 320,
+        "x": 2110,
+        "y": 460,
         "wires": []
     },
     {
@@ -421,8 +401,8 @@
         "name": "",
         "server": "ad6a0e1d76087265",
         "client": "",
-        "x": 500,
-        "y": 140,
+        "x": 480,
+        "y": 100,
         "wires": [
             [
                 "d23aa90a076edba9"
@@ -446,7 +426,54 @@
         "wires": []
     },
     {
-        "id": "c4fba02a88e8a282",
+        "id": "67214956d3114bb0",
+        "type": "file in",
+        "z": "80341690ae105087",
+        "name": "",
+        "filename": "banco.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 710,
+        "y": 60,
+        "wires": [
+            [
+                "fa7395efe6670994"
+            ]
+        ]
+    },
+    {
+        "id": "fa7395efe6670994",
+        "type": "json",
+        "z": "80341690ae105087",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 1010,
+        "y": 60,
+        "wires": [
+            [
+                "018fa3a0dbf3d360"
+            ]
+        ]
+    },
+    {
+        "id": "018fa3a0dbf3d360",
+        "type": "websocket out",
+        "z": "80341690ae105087",
+        "name": "",
+        "server": "ad6a0e1d76087265",
+        "client": "",
+        "x": 1440,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "4ee4d6478a3b722d",
         "type": "debug",
         "z": "80341690ae105087",
         "name": "debug 2",
@@ -457,12 +484,12 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 600,
-        "y": 440,
+        "x": 1540,
+        "y": 540,
         "wires": []
     },
     {
-        "id": "20d6bfa08e5791f4",
+        "id": "7497a26f0d537871",
         "type": "debug",
         "z": "80341690ae105087",
         "name": "debug 6",
@@ -473,9 +500,49 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1140,
-        "y": 440,
+        "x": 1940,
+        "y": 520,
         "wires": []
+    },
+    {
+        "id": "f9e1a3521b535c64",
+        "type": "function",
+        "z": "80341690ae105087",
+        "name": "function 3",
+        "func": "let jogadores = [];\n\ntry {\n    jogadores = JSON.parse(msg.payload); // conteúdo do arquivo\n    if (!Array.isArray(jogadores)) {\n        jogadores = [];\n    }\n} catch (e) {\n    jogadores = [];\n}\n\njogadores.push(msg.jogador);\nmsg.payload = JSON.stringify(jogadores, null, 2);\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1780,
+        "y": 460,
+        "wires": [
+            [
+                "7497a26f0d537871",
+                "37d5c8ad40cf40a7"
+            ]
+        ]
+    },
+    {
+        "id": "37d5c8ad40cf40a7",
+        "type": "file",
+        "z": "80341690ae105087",
+        "name": "",
+        "filename": "rank.json",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1980,
+        "y": 460,
+        "wires": [
+            [
+                "6d4965066d0915c9"
+            ]
+        ]
     },
     {
         "id": "75a9638f6e263217",
