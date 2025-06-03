@@ -64,7 +64,21 @@ function updatePlayerList(dadosPlayer) {
     li.appendChild(pontosSpan);
 
     //Comparação 
+    if (index === 0){
+      li.style.background = "linear-gradient(270deg, #cca114, #dfc450)";
+    }
     
+    else if (index === 1){
+      li.style.background = "linear-gradient(270deg, #61605e, #c4c4c4)";
+    }
+
+    else if (index === 2){
+      li.style.background = "linear-gradient(-270deg, #976500, #9e5400)";
+    }
+
+    else {
+      li.style.background = "linear-gradient(90deg, #2c3e64, #3a507a)"
+    }
 
     rank.appendChild(li);
   });
