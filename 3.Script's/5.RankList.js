@@ -12,11 +12,25 @@ const wsJogadores = new WebSocket(wsJogadoresURL);
 
 wsJogadores.onmessage = (event) => {
   dadosPlayer = JSON.parse(event.data);
-  updatePlayerList(dadosPlayer)
-}
+
+  // Antes de exibir, calculamos a pontuação final e ordenamos:
+  dadosPlayer.forEach(player => {
+    player.pontuacaoFinal = calcularPontuacaoFinal(player.pontuacao, player.tempo);
+  });
+
+  // Ordenar do maior para o menor
+  dadosPlayer.sort((a, b) => b.pontuacaoFinal - a.pontuacaoFinal);
+
+  updatePlayerList(dadosPlayer);
+};
 
 wsJogadores.onopen = () => {
   wsJogadores.send("getRank");
+};
+
+// Função que calcula a pontuação final com base em pontos e tempo
+function calcularPontuacaoFinal(ponto, tempo) {
+  return ponto - (tempo * 0.2);
 }
 
 
@@ -49,7 +63,7 @@ function updatePlayerList(dadosPlayer) {
     li.appendChild(tempoSpan);
     li.appendChild(pontosSpan);
 
-    //variação de cor
+    //Comparação 
     
 
     rank.appendChild(li);
