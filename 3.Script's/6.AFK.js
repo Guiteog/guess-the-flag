@@ -30,7 +30,7 @@ window.addEventListener("beforeunload", () => {
   // Não use window.location.replace aqui
 });
 
-// Inatividade
+// Inatividade1
 let timeoutInatividade = setTimeout(() => desconectar(), tempoLimite);
 ["mousemove", "keydown", "touchstart"].forEach(evt =>
   document.addEventListener(evt, () => {
