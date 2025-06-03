@@ -3,7 +3,7 @@ let rank = document.getElementById("rank");
 
 
 //Link wss
-const wsJogadoresURL ="wss://4742-200-206-76-106.ngrok-free.app/ws/rank";//Sinal para coletar
+const wsJogadoresURL ="wss://3eda-200-211-208-194.ngrok-free.app/ws/rank";//Sinal para coletar
 
 // Criando conexões WebSocket
 const wsJogadores = new WebSocket(wsJogadoresURL);
