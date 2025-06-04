@@ -44,7 +44,7 @@ function updatePlayerList(players) {
   });
 
   // Ativa o botão se tiver 3 ou mais jogadores
-  if (players.length >= 3) {
+  if (players.length >= 1) {
     startBtn.disabled = false;
   } else {
     startBtn.disabled = true;
