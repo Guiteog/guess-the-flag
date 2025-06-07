@@ -48,15 +48,27 @@ function updatePlayerList(dadosPlayer) {
     
     //nome
     const nomeSpan = document.createElement("span");
+    nomeSpan.classList.add("nomeSpan");
     nomeSpan.textContent = player.nome;
 
     //tempo
     const tempoSpan = document.createElement("span");
-    tempoSpan.textContent = player.tempo;
+    tempoSpan.classList.add("tempoSpan");
+    let segundos = player.tempo;
+    if( segundos >= 60){
+      let minutos = segundos / 60;
+      segundos = segundos % 60;
+      tempoSpan.innerText = `${String(minutos).padStart(2,"0")}:${String(segundos).padStart(2,"0")}`;
+    }
 
+    else{
+      let minutos =0;
+      tempoSpan.innerText = `${String(minutos).padStart(2,"0")}:${String(segundos).padStart(2,"0")}`;
+    }
     //pontos
     const pontosSpan = document.createElement("span");
-    pontosSpan.textContent = player.pontuacao
+    pontosSpan.classList.add("pontosSpan");
+    pontosSpan.textContent = player.pontuacao;
 
     //Adiconar itens
     li.appendChild(nomeSpan);
@@ -64,18 +76,23 @@ function updatePlayerList(dadosPlayer) {
     li.appendChild(pontosSpan);
 
     //Comparação 
+
+    //1° Lugar
     if (index === 0){
       li.style.background = "linear-gradient(270deg, #cca114, #dfc450)";
     }
     
+    //2° Lugar
     else if (index === 1){
       li.style.background = "linear-gradient(270deg, #61605e, #c4c4c4)";
     }
 
+    //3° Lugar
     else if (index === 2){
       li.style.background = "linear-gradient(-270deg, #976500, #9e5400)";
     }
 
+    //4° Lugar a diante
     else {
       li.style.background = "linear-gradient(90deg, #2c3e64, #3a507a)"
     }

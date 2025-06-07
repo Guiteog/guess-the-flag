@@ -63,11 +63,18 @@ header {
 }
 
 .results-box li {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  text-align: center;
   padding: 17px;
   margin: 10px 5px 10px 5px;
   border-radius: 20px;
+}
+
+.nomeSpan{
+  display: grid;
+  text-align: start;
 }
   
 .container {
