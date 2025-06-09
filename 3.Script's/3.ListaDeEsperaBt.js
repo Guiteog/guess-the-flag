@@ -26,7 +26,7 @@ wsResposta.onmessage = (event) => {
   sinal = sinalJSON.sinal
 }
 
-wslista.onmessage = (event) => {
+wsLista.onmessage = (event) => {
   players = JSON.parse(event.data);
   updatePlayerList(players)
 };
