@@ -27,7 +27,9 @@ wsLista.onmessage = (event) => {
 
 fetch('https://c4af-191-178-195-176.ngrok-free.app/dados')
   .then( res => res.json())
-  
+  .then(dados => {
+    updatePlayerList(dados)
+  })
 
 //sinal para pegar os dados
 wsJogadores.onopen = () => {

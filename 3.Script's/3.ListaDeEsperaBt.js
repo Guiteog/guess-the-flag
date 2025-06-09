@@ -20,6 +20,12 @@ wsJogadores.onmessage = (event) => {
   updatePlayerList(players)
 };
 
+fetch('https://c4af-191-178-195-176.ngrok-free.app/dados')
+  .then( res => res.json())
+  .then(dados => {
+    updatePlayerList(dados)
+  })
+
 //Espera do sinal
 wsResposta.onmessage = (event) => {
   sinalJSON = JSON.parse(event.data)
