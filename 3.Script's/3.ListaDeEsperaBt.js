@@ -8,11 +8,12 @@ console.log('script carregado');
 //Link wss
 const wsRespostaURL ="wss://1523-200-206-76-106.ngrok-free.app/ws/resposta";//Sinal para a troca de pagina
 const wsJogadoresURL ="wss://1523-200-206-76-106.ngrok-free.app/ws/retornadados";//Sinal para coletar
+const wslistaURL ="wss://1523-200-206-76-106.ngrok-free.app/ws/lista"; //Lista sempre atualizada
 
 // Criando conexões WebSocket
 const wsResposta = new WebSocket(wsRespostaURL);
 const wsJogadores = new WebSocket(wsJogadoresURL);
-
+const wsLista = new WebSocket(wslistaURL);
 //pegar dados dos players
 wsJogadores.onmessage = (event) => {
   players = JSON.parse(event.data);
@@ -24,6 +25,11 @@ wsResposta.onmessage = (event) => {
   sinalJSON = JSON.parse(event.data)
   sinal = sinalJSON.sinal
 }
+
+wslista.onmessage = (event) => {
+  players = JSON.parse(event.data);
+  updatePlayerList(players)
+};
 
 //sinal para pegar os dados
 wsJogadores.onopen = () => {
