@@ -19,9 +19,7 @@ let sinal = true;
 let tempo= 0;
 let segundos = 0;
 let minutos = 0;
-let dados = localStorage.getItem("Jogador");
-let jogador = dados ? JSON.parse(dados) : {};
-let nome = jogador.nome;
+
 //.flags.png; caminho da bandeira
 //.translations.por.common; caminho para achar o país
 
@@ -138,6 +136,9 @@ function ponts(event) {
 
 //-----------------Local Storage------------------//
 async function dados() {
+    let dados = localStorage.getItem("Jogador");
+    let jogador = dados ? JSON.parse(dados) : {};
+    let nome = jogador.nome;
     let payload = {
         nome: nome,
         pontuacao: pontuacao,
