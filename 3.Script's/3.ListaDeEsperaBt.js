@@ -31,6 +31,10 @@ wsLista.onmessage = (event) => {
   updatePlayerList(players)
 };
 
+wsLista.onopen = () => {
+  wsLista.send("getLista");
+}
+
 //sinal para pegar os dados
 wsJogadores.onopen = () => {
   wsJogadores.send("getRank");
