@@ -6,8 +6,8 @@ let sinal = false;
 console.log('script carregado');
 
 //Link wss
-const wsRespostaURL ="wss://4ddb-191-178-195-176.ngrok-free.app/ws/resposta";//Sinal para a troca de pagina
-const wsJogadoresURL ="wss://4ddb-191-178-195-176.ngrok-free.app/ws/retornadados";//Sinal para coletar
+const wsRespostaURL ="wss://1523-200-206-76-106.ngrok-free.app/ws/resposta";//Sinal para a troca de pagina
+const wsJogadoresURL ="wss://1523-200-206-76-106.ngrok-free.app/ws/retornadados";//Sinal para coletar
 
 // Criando conexões WebSocket
 const wsResposta = new WebSocket(wsRespostaURL);
@@ -52,7 +52,7 @@ function updatePlayerList(players) {
 }
 
 function ordem(){
-  fetch(`https://4ddb-191-178-195-176.ngrok-free.app/sinal?sinal=true`, {
+  fetch(`https://1523-200-206-76-106.ngrok-free.app/sinal?sinal=true`, {
     method: 'GET',
     headers: {
         'ngrok-skip-browser-warning': 'true' 
