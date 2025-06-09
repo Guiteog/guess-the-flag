@@ -25,9 +25,10 @@ wsLista.onmessage = (event) => {
   updatePlayerList(players)
 };
 
-wsLista.onopen = () => {
-  wsLista.send("getLista");
-}
+fetch('https://1523-200-206-76-106.ngrok-free.app/dados')
+  .then( res => res.json())
+  
+
 //sinal para pegar os dados
 wsJogadores.onopen = () => {
   wsJogadores.send("getRank");
