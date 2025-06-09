@@ -4,7 +4,7 @@ let nome = JSON.parse(localStorage.getItem("Jogador"));
 
 // Motivo da desconexão
 function desconectar() {
-  fetch("https://1523-200-206-76-106.ngrok-free.app/AFK", {
+  fetch("https://c4af-191-178-195-176.ngrok-free.app/AFK", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ jogadorId: nome.nome})
@@ -25,7 +25,7 @@ document.addEventListener("visibilitychange", () => {
 window.addEventListener("beforeunload", () => {
   localStorage.setItem("voltouHome", "true");
   navigator.sendBeacon(
-    "https://1523-200-206-76-106.ngrok-free.app/AFK",
+    "https://c4af-191-178-195-176.ngrok-free.app/AFK",
     JSON.stringify({ jogadorId: nome.nome})
   );
 });
