@@ -120,16 +120,16 @@ function ponts(event) {
 
     
     // Sorteia um novo país após a resposta
-    setTimeout(() => {
-        if(round === 9){
-            dados()
+    setTimeout(async () => {
+        if (round === 9) {
+            await dados();
             localStorage.clear();
             sinal = false;
             window.location.replace("../2.fim/final.html");
         }
         pontuacaoElemento.style.color = "";
-        button()
-        sortPais()
+        button();
+        sortPais();
         round += 1;
     }, 100);
 }
