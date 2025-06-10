@@ -5,9 +5,9 @@ let players;
 let sinal = false;
 
 //Link wss
-const wsRespostaURL ="wss://c4af-191-178-195-176.ngrok-free.app/ws/resposta";//Sinal para a troca de pagina
-const wsJogadoresURL ="wss://c4af-191-178-195-176.ngrok-free.app/ws/retornadados";//Sinal para coletar
-const wslistaURL ="wss://c4af-191-178-195-176.ngrok-free.app/ws/lista"; //Lista sempre atualizada
+const wsRespostaURL ="wss://ff30-200-211-208-194.ngrok-free.app/ws/resposta";//Sinal para a troca de pagina
+const wsJogadoresURL ="wss://ff30-200-211-208-194.ngrok-free.app/ws/retornadados";//Sinal para coletar
+const wslistaURL ="wss://ff30-200-211-208-194.ngrok-free.app/ws/lista"; //Lista sempre atualizada
 
 // Criando conexões WebSocket
 const wsResposta = new WebSocket(wsRespostaURL);
@@ -25,7 +25,7 @@ wsLista.onmessage = (event) => {
   updatePlayerList(players)
 };
 
-fetch('https://c4af-191-178-195-176.ngrok-free.app/dados')
+fetch('https://ff30-200-211-208-194.ngrok-free.app/dados')
   .then( res => res.json())
   .then(dados => {
     updatePlayerList(dados)

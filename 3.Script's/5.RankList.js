@@ -2,7 +2,7 @@ let dadosPlayer;
 let rank = document.getElementById("rank");
 
 // Link do WebSocket
-const wsJogadoresURL = "wss://c4af-191-178-195-176.ngrok-free.app/ws/rank";
+const wsJogadoresURL = "wss://ff30-200-211-208-194.ngrok-free.app/ws/rank";
 const wsJogadores = new WebSocket(wsJogadoresURL);
 
 // Quando recebe os dados
