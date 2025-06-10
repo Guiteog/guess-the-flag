@@ -23,17 +23,12 @@ document.addEventListener("visibilitychange", () => {
 
 // Fecha aba ou atualiza
 window.addEventListener("beforeunload", () => {
-  localStorage.setItem("voltouHome", "true");
   navigator.sendBeacon(
     "https://ff30-200-211-208-194.ngrok-free.app/AFK",
     JSON.stringify({ jogadorId: nome.nome})
   );
 });
 
-if (localStorage.getItem("voltouHome") === "true") {
-  localStorage.removeItem("voltouHome");
-  window.location.replace("../index.html");
-}
 
 // Inatividade1
 let timeoutInatividade = setTimeout(() => desconectar(), tempoLimite);
