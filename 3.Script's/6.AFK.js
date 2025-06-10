@@ -21,7 +21,7 @@ document.addEventListener("visibilitychange", () => {
   }
 });
 
-// Fecha aba ou atualiza
+// Fecha aba ou atualiza1
 window.addEventListener("beforeunload", () => {
   navigator.sendBeacon(
     "https://ff30-200-211-208-194.ngrok-free.app/AFK",
