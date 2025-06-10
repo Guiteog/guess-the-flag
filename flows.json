@@ -1,6 +1,6 @@
 [
     {
-        "id": "80341690ae105087",
+        "id": "fe724bb1f61eb758",
         "type": "tab",
         "label": "Dados",
         "disabled": false,
@@ -8,7 +8,7 @@
         "env": []
     },
     {
-        "id": "ccf8f3476cbc1c2d",
+        "id": "1a1bc90824a493c4",
         "type": "tab",
         "label": "Paises",
         "disabled": false,
@@ -16,7 +16,7 @@
         "env": []
     },
     {
-        "id": "af3fb59981efa5dd",
+        "id": "f8989523cb9537ee",
         "type": "tab",
         "label": "AFK",
         "disabled": false,
@@ -24,7 +24,7 @@
         "env": []
     },
     {
-        "id": "1a9733d742b99cab",
+        "id": "fdf490cc6ae56bac",
         "type": "tab",
         "label": "Gatilho",
         "disabled": false,
@@ -47,15 +47,21 @@
         "headers": []
     },
     {
-        "id": "70d5afa84c288ade",
+        "id": "ba9e09194482403d",
         "type": "websocket-listener",
         "path": "/ws/rank",
         "wholemsg": "false"
     },
     {
-        "id": "8c42cb475d23d41a",
+        "id": "b8b797eb1511cafe",
+        "type": "websocket-listener",
+        "path": "/ws/lista",
+        "wholemsg": "false"
+    },
+    {
+        "id": "58c8c84b841ec55f",
         "type": "function",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "function 1",
         "func": "let dados = [];\n\ntry {\n    // Remove espaços e converte a string JSON em objeto\n    let jsonString = msg.payload.trim();\n    let jsonObjeto = JSON.parse(jsonString);\n\n    // Garante que é um array\n    if (!Array.isArray(jsonObjeto)) {\n        jsonObjeto = [jsonObjeto];\n    }\n\n    // Filtra apenas os objetos que têm propriedade 'nome'\n    dados = jsonObjeto.filter(item => item.nome);\n} catch (e) {\n    // Caso dê erro na leitura do JSON, inicia array vazio\n    dados = [];\n}\n\n// Pega o nome enviado na query da URL \nlet nome = msg.req.query.nome;\nif (nome) {\n    dados.push({ nome: nome });\n}\n\n// Remove o nome \"nomeADM123\" da lista\ndados = dados.filter(item => item.nome !== \"nomeADM123\");\n\n// Atualiza o payload com o array de objetos (não string JSON)\nmsg.payload = dados;\n\nreturn msg;\n",
         "outputs": 1,
@@ -68,14 +74,14 @@
         "y": 240,
         "wires": [
             [
-                "43bb9c4563668f8f"
+                "13f0855e7a256ae0"
             ]
         ]
     },
     {
-        "id": "305bff1e65f48743",
+        "id": "6c401a055e7a3b9c",
         "type": "http response",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -84,9 +90,9 @@
         "wires": []
     },
     {
-        "id": "05cb3674ab434efd",
+        "id": "03ada0765c9f0f9a",
         "type": "http in",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "url": "/dados",
         "method": "get",
@@ -96,14 +102,14 @@
         "y": 240,
         "wires": [
             [
-                "b72ac96fe8648bf5"
+                "46fa7a96fc4f1fc9"
             ]
         ]
     },
     {
-        "id": "d23aa90a076edba9",
+        "id": "f055794cd368483a",
         "type": "file in",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "filename": "banco.json",
         "filenameType": "str",
@@ -116,14 +122,14 @@
         "y": 100,
         "wires": [
             [
-                "42e2c1d503f199cc"
+                "a5418148fc9b8ac1"
             ]
         ]
     },
     {
-        "id": "42e2c1d503f199cc",
+        "id": "a5418148fc9b8ac1",
         "type": "json",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "property": "payload",
         "action": "obj",
@@ -132,15 +138,15 @@
         "y": 100,
         "wires": [
             [
-                "ef0b5bebf3d012e9",
-                "3cdd103c4498bbd6"
+                "c417468cff3dab47",
+                "a74032f4f6a41905"
             ]
         ]
     },
     {
-        "id": "43bb9c4563668f8f",
+        "id": "13f0855e7a256ae0",
         "type": "file",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "filename": "banco.json",
         "filenameType": "str",
@@ -152,14 +158,14 @@
         "y": 240,
         "wires": [
             [
-                "305bff1e65f48743"
+                "6c401a055e7a3b9c"
             ]
         ]
     },
     {
-        "id": "3cdd103c4498bbd6",
+        "id": "a74032f4f6a41905",
         "type": "debug",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "debug 1",
         "active": true,
         "tosidebar": true,
@@ -173,9 +179,9 @@
         "wires": []
     },
     {
-        "id": "b72ac96fe8648bf5",
+        "id": "46fa7a96fc4f1fc9",
         "type": "file in",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "filename": "banco.json",
         "filenameType": "str",
@@ -188,14 +194,14 @@
         "y": 240,
         "wires": [
             [
-                "8c42cb475d23d41a"
+                "58c8c84b841ec55f"
             ]
         ]
     },
     {
-        "id": "d0b9f26c3ec5e11e",
+        "id": "9a8c4f9d6bbe3785",
         "type": "http in",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "url": "/dadosjogador",
         "method": "post",
@@ -205,14 +211,14 @@
         "y": 460,
         "wires": [
             [
-                "e5c13519a51a00e0"
+                "17b45ae2fac03ab5"
             ]
         ]
     },
     {
-        "id": "09299e44586a6f2b",
+        "id": "46058259284fded9",
         "type": "file in",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "filename": "rank.json",
         "filenameType": "str",
@@ -225,14 +231,14 @@
         "y": 460,
         "wires": [
             [
-                "f9e1a3521b535c64"
+                "c3921399a7990652"
             ]
         ]
     },
     {
-        "id": "e5c13519a51a00e0",
+        "id": "17b45ae2fac03ab5",
         "type": "function",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "func": "let nome = msg.payload.nome;\nlet pontuacao = msg.payload.pontuacao;\nlet tempo = msg.payload.tempo;\n\nlet jogador = {\n    nome:nome,\n    pontuacao: pontuacao,\n    tempo: tempo,\n};\n\nmsg.jogador = jogador;\nreturn msg",
         "outputs": 1,
@@ -245,15 +251,15 @@
         "y": 460,
         "wires": [
             [
-                "09299e44586a6f2b",
-                "4ee4d6478a3b722d"
+                "46058259284fded9",
+                "9b03e01e49783f78"
             ]
         ]
     },
     {
-        "id": "f35dcbb41bea34ab",
+        "id": "13875596983d502b",
         "type": "watch",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "files": "banco.json",
         "recursive": "",
@@ -261,14 +267,14 @@
         "y": 60,
         "wires": [
             [
-                "67214956d3114bb0"
+                "d4372a303939997e"
             ]
         ]
     },
     {
-        "id": "ef0b5bebf3d012e9",
+        "id": "c417468cff3dab47",
         "type": "websocket out",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "server": "ad6a0e1d76087265",
         "client": "",
@@ -277,20 +283,20 @@
         "wires": []
     },
     {
-        "id": "2f64489d761747cd",
+        "id": "55cc325f602bfafe",
         "type": "websocket out",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
-        "server": "70d5afa84c288ade",
+        "server": "ba9e09194482403d",
         "client": "",
         "x": 870,
         "y": 660,
         "wires": []
     },
     {
-        "id": "6d4965066d0915c9",
+        "id": "3815d3b1cea1335a",
         "type": "http response",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -299,9 +305,9 @@
         "wires": []
     },
     {
-        "id": "3ccd44328cfa7457",
+        "id": "0ee5062663361e71",
         "type": "file in",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "filename": "rank.json",
         "filenameType": "str",
@@ -314,15 +320,15 @@
         "y": 660,
         "wires": [
             [
-                "b5982219ff9a395e",
-                "3fbea20e26d18f0b"
+                "8256fd647af5133c",
+                "798ea4853b7aec14"
             ]
         ]
     },
     {
-        "id": "b5982219ff9a395e",
+        "id": "8256fd647af5133c",
         "type": "json",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "property": "payload",
         "action": "obj",
@@ -331,45 +337,45 @@
         "y": 660,
         "wires": [
             [
-                "2f64489d761747cd",
-                "981bf844aea0d645"
+                "55cc325f602bfafe",
+                "15960e7a174dc558"
             ]
         ]
     },
     {
-        "id": "3d3f6153ae20e1ea",
+        "id": "211e56c3d938ebaa",
         "type": "websocket in",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
-        "server": "70d5afa84c288ade",
+        "server": "ba9e09194482403d",
         "client": "",
         "x": 310,
         "y": 660,
         "wires": [
             [
-                "3ccd44328cfa7457"
+                "0ee5062663361e71"
             ]
         ]
     },
     {
-        "id": "f7787c3d90b0e7dd",
+        "id": "78c93cbea1bc8d71",
         "type": "watch",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "files": "rank.json",
         "recursive": "",
         "x": 300,
-        "y": 740,
+        "y": 820,
         "wires": [
             [
-                "3ccd44328cfa7457"
+                "96aa3e6731b6bb67"
             ]
         ]
     },
     {
-        "id": "06158b1b3e30c4eb",
+        "id": "2881ec5fa4bf2925",
         "type": "http in",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "url": "/rank",
         "method": "get",
@@ -379,14 +385,14 @@
         "y": 600,
         "wires": [
             [
-                "3ccd44328cfa7457"
+                "0ee5062663361e71"
             ]
         ]
     },
     {
-        "id": "981bf844aea0d645",
+        "id": "15960e7a174dc558",
         "type": "http response",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -395,9 +401,9 @@
         "wires": []
     },
     {
-        "id": "11f260904f1c2b42",
+        "id": "89aef3aa2ad1969a",
         "type": "websocket in",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "server": "ad6a0e1d76087265",
         "client": "",
@@ -405,14 +411,14 @@
         "y": 100,
         "wires": [
             [
-                "d23aa90a076edba9"
+                "f055794cd368483a"
             ]
         ]
     },
     {
-        "id": "3fbea20e26d18f0b",
+        "id": "798ea4853b7aec14",
         "type": "debug",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "debug 5",
         "active": true,
         "tosidebar": true,
@@ -426,9 +432,9 @@
         "wires": []
     },
     {
-        "id": "67214956d3114bb0",
+        "id": "d4372a303939997e",
         "type": "file in",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "filename": "banco.json",
         "filenameType": "str",
@@ -441,14 +447,14 @@
         "y": 60,
         "wires": [
             [
-                "fa7395efe6670994"
+                "6fef26696b2d373b"
             ]
         ]
     },
     {
-        "id": "fa7395efe6670994",
+        "id": "6fef26696b2d373b",
         "type": "json",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "property": "payload",
         "action": "obj",
@@ -457,25 +463,25 @@
         "y": 60,
         "wires": [
             [
-                "018fa3a0dbf3d360"
+                "be6db4a95b18105d"
             ]
         ]
     },
     {
-        "id": "018fa3a0dbf3d360",
+        "id": "be6db4a95b18105d",
         "type": "websocket out",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
-        "server": "ad6a0e1d76087265",
+        "server": "b8b797eb1511cafe",
         "client": "",
-        "x": 1440,
+        "x": 1410,
         "y": 60,
         "wires": []
     },
     {
-        "id": "4ee4d6478a3b722d",
+        "id": "9b03e01e49783f78",
         "type": "debug",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "debug 2",
         "active": true,
         "tosidebar": true,
@@ -489,9 +495,9 @@
         "wires": []
     },
     {
-        "id": "7497a26f0d537871",
+        "id": "1562cb9d4ca587f3",
         "type": "debug",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "debug 6",
         "active": true,
         "tosidebar": true,
@@ -505,9 +511,9 @@
         "wires": []
     },
     {
-        "id": "f9e1a3521b535c64",
+        "id": "c3921399a7990652",
         "type": "function",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "function 3",
         "func": "let jogadores = [];\n\ntry {\n    jogadores = JSON.parse(msg.payload); // conteúdo do arquivo\n    if (!Array.isArray(jogadores)) {\n        jogadores = [];\n    }\n} catch (e) {\n    jogadores = [];\n}\n\njogadores.push(msg.jogador);\nmsg.payload = JSON.stringify(jogadores, null, 2);\nreturn msg;\n\n",
         "outputs": 1,
@@ -520,15 +526,15 @@
         "y": 460,
         "wires": [
             [
-                "7497a26f0d537871",
-                "37d5c8ad40cf40a7"
+                "1562cb9d4ca587f3",
+                "c3ea3709655a4c13"
             ]
         ]
     },
     {
-        "id": "37d5c8ad40cf40a7",
+        "id": "c3ea3709655a4c13",
         "type": "file",
-        "z": "80341690ae105087",
+        "z": "fe724bb1f61eb758",
         "name": "",
         "filename": "rank.json",
         "filenameType": "str",
@@ -540,14 +546,202 @@
         "y": 460,
         "wires": [
             [
-                "6d4965066d0915c9"
+                "3815d3b1cea1335a"
             ]
         ]
     },
     {
-        "id": "75a9638f6e263217",
+        "id": "e8e0a36a31da0766",
+        "type": "websocket out",
+        "z": "fe724bb1f61eb758",
+        "name": "",
+        "server": "ba9e09194482403d",
+        "client": "",
+        "x": 830,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "96aa3e6731b6bb67",
+        "type": "file in",
+        "z": "fe724bb1f61eb758",
+        "name": "",
+        "filename": "rank.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 480,
+        "y": 820,
+        "wires": [
+            [
+                "f32584408a44586d"
+            ]
+        ]
+    },
+    {
+        "id": "f32584408a44586d",
+        "type": "json",
+        "z": "fe724bb1f61eb758",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 650,
+        "y": 820,
+        "wires": [
+            [
+                "e8e0a36a31da0766"
+            ]
+        ]
+    },
+    {
+        "id": "2910c4e96808100d",
+        "type": "file in",
+        "z": "fe724bb1f61eb758",
+        "name": "",
+        "filename": "rank.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 1540,
+        "y": 660,
+        "wires": [
+            [
+                "97055b156c79816f"
+            ]
+        ]
+    },
+    {
+        "id": "e04da7579a3805a3",
+        "type": "function",
+        "z": "fe724bb1f61eb758",
+        "name": "",
+        "func": "let nome = msg.req.query.nome;\nlet pontuacao = msg.req.query.pontuacao;\nlet tempo = msg.req.query.tempo;\n\nlet jogador = {\n    nome:nome,\n    pontuacao: pontuacao,\n    tempo: tempo,\n};\n\nmsg.jogador = jogador;\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1380,
+        "y": 660,
+        "wires": [
+            [
+                "2910c4e96808100d",
+                "175fcd756f0f9b6b"
+            ]
+        ]
+    },
+    {
+        "id": "789b874c040c54b7",
+        "type": "http response",
+        "z": "fe724bb1f61eb758",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 2110,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "175fcd756f0f9b6b",
+        "type": "debug",
+        "z": "fe724bb1f61eb758",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1540,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "092531a84f62c645",
+        "type": "debug",
+        "z": "fe724bb1f61eb758",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1940,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "97055b156c79816f",
+        "type": "function",
+        "z": "fe724bb1f61eb758",
+        "name": "function 4",
+        "func": "let jogadores = [];\n\ntry {\n    jogadores = JSON.parse(msg.payload); // conteúdo do arquivo\n    if (!Array.isArray(jogadores)) {\n        jogadores = [];\n    }\n} catch (e) {\n    jogadores = [];\n}\n\njogadores.push(msg.jogador);\nmsg.payload = JSON.stringify(jogadores, null, 2);\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1780,
+        "y": 660,
+        "wires": [
+            [
+                "092531a84f62c645",
+                "26e45bad039df650"
+            ]
+        ]
+    },
+    {
+        "id": "26e45bad039df650",
+        "type": "file",
+        "z": "fe724bb1f61eb758",
+        "name": "",
+        "filename": "rank.json",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1980,
+        "y": 660,
+        "wires": [
+            [
+                "789b874c040c54b7"
+            ]
+        ]
+    },
+    {
+        "id": "d7eb47634673b0c8",
         "type": "http in",
-        "z": "ccf8f3476cbc1c2d",
+        "z": "fe724bb1f61eb758",
+        "name": "",
+        "url": "/dadosjogadorm",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 1200,
+        "y": 660,
+        "wires": [
+            [
+                "e04da7579a3805a3"
+            ]
+        ]
+    },
+    {
+        "id": "ef545f7251568135",
+        "type": "http in",
+        "z": "1a1bc90824a493c4",
         "name": "",
         "url": "/paises",
         "method": "get",
@@ -557,34 +751,34 @@
         "y": 300,
         "wires": [
             [
-                "e6e09089c0bac4eb"
+                "8cef3872b13c53d6"
             ]
         ]
     },
     {
-        "id": "e6e09089c0bac4eb",
+        "id": "8cef3872b13c53d6",
         "type": "file in",
-        "z": "ccf8f3476cbc1c2d",
+        "z": "1a1bc90824a493c4",
         "name": "",
-        "filename": "C:\\Users\\Aluno\\Desktop\\Dev\\paises.json",
+        "filename": "C:\\Users\\guitg\\OneDrive\\Desktop\\projetos\\pnt\\paises.json",
         "filenameType": "str",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 780,
+        "x": 830,
         "y": 360,
         "wires": [
             [
-                "54921663123ebbc1"
+                "74ac7bcdc6ea2785"
             ]
         ]
     },
     {
-        "id": "54921663123ebbc1",
+        "id": "74ac7bcdc6ea2785",
         "type": "json",
-        "z": "ccf8f3476cbc1c2d",
+        "z": "1a1bc90824a493c4",
         "name": "",
         "property": "payload",
         "action": "",
@@ -593,14 +787,14 @@
         "y": 420,
         "wires": [
             [
-                "b2907f948e68de3b"
+                "4a091e6f4405758a"
             ]
         ]
     },
     {
-        "id": "b2907f948e68de3b",
+        "id": "4a091e6f4405758a",
         "type": "http response",
-        "z": "ccf8f3476cbc1c2d",
+        "z": "1a1bc90824a493c4",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -609,9 +803,9 @@
         "wires": []
     },
     {
-        "id": "163f0f2840dfe38a",
+        "id": "ed55aa06dc8e222f",
         "type": "http in",
-        "z": "af3fb59981efa5dd",
+        "z": "f8989523cb9537ee",
         "name": "Recebe AFK",
         "url": "/AFK",
         "method": "post",
@@ -621,14 +815,14 @@
         "y": 220,
         "wires": [
             [
-                "77a3d8a68932833c"
+                "d2b728b1e3158c7f"
             ]
         ]
     },
     {
-        "id": "77a3d8a68932833c",
+        "id": "d2b728b1e3158c7f",
         "type": "json",
-        "z": "af3fb59981efa5dd",
+        "z": "f8989523cb9537ee",
         "name": "Parse JSON",
         "property": "payload",
         "action": "",
@@ -637,15 +831,15 @@
         "y": 280,
         "wires": [
             [
-                "d8290ffd1d0ad105",
-                "21d889585d486666"
+                "c198dd1ed187cf52",
+                "0e54ba4dd554ccae"
             ]
         ]
     },
     {
-        "id": "d8290ffd1d0ad105",
+        "id": "c198dd1ed187cf52",
         "type": "function",
-        "z": "af3fb59981efa5dd",
+        "z": "f8989523cb9537ee",
         "name": "Pega jogadorId",
         "func": "msg.jogadorId = msg.payload.jogadorId;\nreturn msg;\n",
         "outputs": 1,
@@ -658,15 +852,15 @@
         "y": 340,
         "wires": [
             [
-                "d01c0b2cdf38f26d",
-                "21d889585d486666"
+                "4f844d60eab83940",
+                "0e54ba4dd554ccae"
             ]
         ]
     },
     {
-        "id": "d01c0b2cdf38f26d",
+        "id": "4f844d60eab83940",
         "type": "file in",
-        "z": "af3fb59981efa5dd",
+        "z": "f8989523cb9537ee",
         "name": "",
         "filename": "banco.json",
         "filenameType": "str",
@@ -677,15 +871,15 @@
         "y": 400,
         "wires": [
             [
-                "fd8f12e77f1e70d2",
-                "21d889585d486666"
+                "ce134c65cbbaef69",
+                "0e54ba4dd554ccae"
             ]
         ]
     },
     {
-        "id": "fd8f12e77f1e70d2",
+        "id": "ce134c65cbbaef69",
         "type": "json",
-        "z": "af3fb59981efa5dd",
+        "z": "f8989523cb9537ee",
         "name": "Parse para array",
         "property": "payload",
         "action": "",
@@ -694,14 +888,14 @@
         "y": 460,
         "wires": [
             [
-                "345ce97d6f574a5c"
+                "921d10f1fb158d32"
             ]
         ]
     },
     {
-        "id": "345ce97d6f574a5c",
+        "id": "921d10f1fb158d32",
         "type": "function",
-        "z": "af3fb59981efa5dd",
+        "z": "f8989523cb9537ee",
         "name": "Remove jogador",
         "func": "let jogadores = msg.payload;\nlet jogadorId = msg.jogadorId; // ← vem do node Function anterior\n\n// Filtra a lista, removendo o jogador com o nome igual ao jogadorId\njogadores = jogadores.filter(j => j.nome !== jogadorId);\n\n// Retorna a lista atualizada para salvar no banco.json\nmsg.payload = JSON.stringify(jogadores, null, 2);\nreturn msg;",
         "outputs": 1,
@@ -714,15 +908,15 @@
         "y": 520,
         "wires": [
             [
-                "133ee2ed94d0b1e6",
-                "21d889585d486666"
+                "5c0398c2b1a5486b",
+                "0e54ba4dd554ccae"
             ]
         ]
     },
     {
-        "id": "133ee2ed94d0b1e6",
+        "id": "5c0398c2b1a5486b",
         "type": "file",
-        "z": "af3fb59981efa5dd",
+        "z": "f8989523cb9537ee",
         "name": "",
         "filename": "banco.json",
         "filenameType": "str",
@@ -734,15 +928,15 @@
         "y": 580,
         "wires": [
             [
-                "c05cb409173dcb95",
-                "21d889585d486666"
+                "0247dca6d52774d9",
+                "0e54ba4dd554ccae"
             ]
         ]
     },
     {
-        "id": "c05cb409173dcb95",
+        "id": "0247dca6d52774d9",
         "type": "http response",
-        "z": "af3fb59981efa5dd",
+        "z": "f8989523cb9537ee",
         "name": "Resposta OK",
         "statusCode": "",
         "headers": {},
@@ -751,9 +945,9 @@
         "wires": []
     },
     {
-        "id": "21d889585d486666",
+        "id": "0e54ba4dd554ccae",
         "type": "debug",
-        "z": "af3fb59981efa5dd",
+        "z": "f8989523cb9537ee",
         "name": "debug 3",
         "active": true,
         "tosidebar": true,
@@ -767,9 +961,9 @@
         "wires": []
     },
     {
-        "id": "f6c64eb997556d11",
+        "id": "d5a7f19405d1fb28",
         "type": "http in",
-        "z": "1a9733d742b99cab",
+        "z": "fdf490cc6ae56bac",
         "name": "",
         "url": "/sinal",
         "method": "get",
@@ -779,15 +973,16 @@
         "y": 340,
         "wires": [
             [
-                "753f02bea4092b1d",
-                "3c71b4e0f05d44f7"
+                "3ea45130f94652d3",
+                "510ff46d43d48725",
+                "e2475690ad43017d"
             ]
         ]
     },
     {
-        "id": "234046620f3dcaec",
+        "id": "014055d75637bf91",
         "type": "http in",
-        "z": "1a9733d742b99cab",
+        "z": "fdf490cc6ae56bac",
         "name": "",
         "url": "/reposta",
         "method": "get",
@@ -797,15 +992,15 @@
         "y": 420,
         "wires": [
             [
-                "5dbe9458f00c3cdb",
-                "3c71b4e0f05d44f7"
+                "ecc508aabce52ac8",
+                "510ff46d43d48725"
             ]
         ]
     },
     {
-        "id": "5dbe9458f00c3cdb",
+        "id": "ecc508aabce52ac8",
         "type": "function",
-        "z": "1a9733d742b99cab",
+        "z": "fdf490cc6ae56bac",
         "name": "",
         "func": "const sinal = flow.get('sinal') || false;\nmsg.payload = { sinal };\nreturn msg;",
         "outputs": 1,
@@ -818,15 +1013,15 @@
         "y": 500,
         "wires": [
             [
-                "7a26abec4dcd6157",
-                "3c71b4e0f05d44f7"
+                "f8477765a1215e2c",
+                "510ff46d43d48725"
             ]
         ]
     },
     {
-        "id": "7a26abec4dcd6157",
+        "id": "f8477765a1215e2c",
         "type": "http response",
-        "z": "1a9733d742b99cab",
+        "z": "fdf490cc6ae56bac",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -835,9 +1030,9 @@
         "wires": []
     },
     {
-        "id": "753f02bea4092b1d",
+        "id": "3ea45130f94652d3",
         "type": "function",
-        "z": "1a9733d742b99cab",
+        "z": "fdf490cc6ae56bac",
         "name": "function 2",
         "func": "const novoSinal = msg.req.query.sinal === 'true';\nflow.set('sinal', novoSinal);\n\n// Define o payload da mensagem\nmsg.payload = { sinal: novoSinal };\n\nreturn msg;\n",
         "outputs": 1,
@@ -850,15 +1045,15 @@
         "y": 340,
         "wires": [
             [
-                "818f128bae01547c",
-                "3c71b4e0f05d44f7"
+                "0cf66dd08ac11178",
+                "510ff46d43d48725"
             ]
         ]
     },
     {
-        "id": "818f128bae01547c",
+        "id": "0cf66dd08ac11178",
         "type": "websocket out",
-        "z": "1a9733d742b99cab",
+        "z": "fdf490cc6ae56bac",
         "name": "",
         "server": "",
         "client": "fa0f974b1218259c",
@@ -867,9 +1062,9 @@
         "wires": []
     },
     {
-        "id": "3c71b4e0f05d44f7",
+        "id": "510ff46d43d48725",
         "type": "debug",
-        "z": "1a9733d742b99cab",
+        "z": "fdf490cc6ae56bac",
         "name": "debug 4",
         "active": true,
         "tosidebar": true,
@@ -881,5 +1076,42 @@
         "x": 860,
         "y": 500,
         "wires": []
+    },
+    {
+        "id": "e2475690ad43017d",
+        "type": "function",
+        "z": "fdf490cc6ae56bac",
+        "name": "function 5",
+        "func": "msg.payload = [];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 280,
+        "wires": [
+            [
+                "08c9faaa82f08cb6"
+            ]
+        ]
+    },
+    {
+        "id": "08c9faaa82f08cb6",
+        "type": "file",
+        "z": "fdf490cc6ae56bac",
+        "name": "",
+        "filename": "rank.json",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 840,
+        "y": 280,
+        "wires": [
+            []
+        ]
     }
 ]
