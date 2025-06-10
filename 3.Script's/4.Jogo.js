@@ -9,8 +9,9 @@ let nome_pais = document.querySelector('h2'); //Resposta do a amostra para saber
 let botoes = document.querySelectorAll('.button'); // Resposta do cliente
 let pontuacaoElemento = document.getElementById('pts_jogo'); //Valor do pts
 let tempoElemento = document.getElementById('cronometro');
-let somAcerto = document.getElementById('correct-156911.mp3');
-let somErro = document.getElementById('wrong-47985.mp3');
+let somAcerto = document.getElementById('somAcerto');
+let somErro = document.getElementById('somErro');
+
 let pontuacao = 0; 
 let nomeButtons = [];//lista para colocar os paises
 let randomIndex= [];
@@ -124,6 +125,14 @@ function ponts(event) {
         ? "linear-gradient(135deg,rgb(16, 184, 52), #218838)"
         : "linear-gradient(135deg,rgb(124, 8, 8), #c0392b)";
     botaoClick.style.color = "#fff";
+
+    if (acertou) {
+        somAcerto.currentTime = 0;
+        somAcerto.play();
+    } else {
+        somErro.currentTime = 0;
+        somErro.play();
+    }
 
     // Aguarda antes de sortear nova pergunta
     setTimeout(async () => {
