@@ -112,13 +112,7 @@ function ponts(event) {
 
     const acertou = botaoClick.textContent === pais;
 
-    if (botaoClick.textContent === pais) {
-        somAcerto.currentTime = 0;
-        somAcerto.play();
-    } else {
-        somErro.currentTime = 0;
-        somErro.play();
-    }
+    
 
     // Atualiza pontuação
     pontuacao += acertou ? 10 : -5;
