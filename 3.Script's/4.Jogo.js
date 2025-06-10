@@ -9,6 +9,8 @@ let nome_pais = document.querySelector('h2'); //Resposta do a amostra para saber
 let botoes = document.querySelectorAll('.button'); // Resposta do cliente
 let pontuacaoElemento = document.getElementById('pts_jogo'); //Valor do pts
 let tempoElemento = document.getElementById('cronometro');
+let somAcerto = document.getElementById('correct-156911.mp3');
+let somErro = document.getElementById('wrong-47985.mp3');
 let pontuacao = 0; 
 let nomeButtons = [];//lista para colocar os paises
 let randomIndex= [];
@@ -43,6 +45,7 @@ fetch('https://ff30-200-211-208-194.ngrok-free.app/paises', {
 function sortPais(){
     // Limpar lista de nomes de países
     nomeButtons = [];
+    botoes.forEach(btn => btn.disabled = false);
 
     // Sorteia um país correto
     randomIndex = Math.floor(Math.random() * paises.length);
@@ -96,7 +99,7 @@ function button(){
             
             setTimeout(() => {
                 button.style.background = ""
-            }, 100);
+            }, 400);
         }
     
     })
@@ -104,35 +107,53 @@ function button(){
 
 // Função para verificar a resposta
 function ponts(event) {
+    botoes.forEach(btn => btn.disabled = true);
+    let botaoClick = event.target;
 
-    
-    let botaoClick = event.target.textContent;
+    const acertou = botaoClick.textContent === pais;
 
-    if (botaoClick === pais) {
-        pontuacao += 10;
-        pontuacaoElemento.innerText = pontuacao;
-        pontuacaoElemento.style.color = "#2ECC71";
+    if (botaoClick.textContent === pais) {
+        somAcerto.currentTime = 0;
+        somAcerto.play();
     } else {
-        pontuacao -= 5;
-        pontuacaoElemento.innerText = pontuacao;
-        pontuacaoElemento.style.color = "#E63946";
+        somErro.currentTime = 0;
+        somErro.play();
     }
 
-    
-    // Sorteia um novo país após a resposta
+    // Atualiza pontuação
+    pontuacao += acertou ? 10 : -5;
+    pontuacaoElemento.innerText = pontuacao;
+    pontuacaoElemento.style.color = acertou ? "#2ECC71" : "#E63946";
+
+    // Mostra o botão com cor verde ou vermelha
+    botaoClick.style.background = acertou
+        ? "linear-gradient(135deg,rgb(16, 184, 52), #218838)"
+        : "linear-gradient(135deg,rgb(124, 8, 8), #c0392b)";
+    botaoClick.style.color = "#fff";
+
+    // Aguarda antes de sortear nova pergunta
     setTimeout(async () => {
+        // limpa estilos
+        botoes.forEach(btn => {
+            btn.disabled = false;
+            btn.style.background = "";
+            btn.style.color = "";
+        });
+
+        pontuacaoElemento.style.color = "";
+
         if (round === 9) {
             await dados();
             localStorage.clear();
             sinal = false;
             window.location.replace("../2.fim/final.html");
         }
-        pontuacaoElemento.style.color = "";
-        button();
+
         sortPais();
         round += 1;
-    }, 100);
+    }, 400); // tempo para o jogador ver a cor
 }
+
 
 //-----------------Local Storage------------------//
 async function dados() {
